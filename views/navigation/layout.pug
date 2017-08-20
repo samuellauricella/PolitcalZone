@@ -5,43 +5,25 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous")
   body
-    block nav
+    nav.navbar.navbar-expand-lg.navbar-light.bg-light
+      a.navbar-brand
+        img(src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" width="30" height="30")
+      .collapse.navbar-collapse#navbarNavDropdown
+        ul.navbar-nav
+          li.nav-item.active
+            a.nav-link(href="#") Home
+          li.nav-item
+            a.nav-link(href="#") Pricing
+          li.nav-item.dropdown
+            a.nav-link.dropdown-toggle#navbarDropdownMenuLink(data-toggle="dropdown") Dropdown
+            .dropdown-menu
+              a.dropdown-item Action
+              a.dropdown-item BOb
 
-  br
 
-  hr
-  #carouselExampleControls.carousel.slide(data-ride="carousel")
-    .carousel-inner
-      .carousel-item.active
-        img.d-block.w-100(src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_15dfd25d30f%20text%20%7B%20fill%3A%23555%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_15dfd25d30f%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22285.921875%22%20y%3D%22218.45%22%3EFirst%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" alt="first")
-      .carousel-item
-        img.d-block.w-100(src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_15dfd25d311%20text%20%7B%20fill%3A%23444%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_15dfd25d311%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23666%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22247.3203125%22%20y%3D%22218.45%22%3ESecond%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" alt="second")
-      a.carousel-control-prev(href="#carouselExampleControls" role="button" data-slide="prev")
-        span.carousel-control-prev-icon
-        span.sr-only Previous
-      a.carousel-control-next(href="#carouselExampleControls" role="button" data-slide="next")
-        span.carousel-control-next-icon
-        span.sr-only Next
+  block content
 
-  hr
-  .container
-    .row
-      .col-6
-        .jumbotron.col
-          h1 Main story
-      .col trending maybe favorites
-  .row
-    span.label.label-default THE POLITICAL ZONE
 
-  hr
-
-  .container
-    .row
-      .col-6.col-md-4 Liberal
-      .col-6.col-md-4 Conservative
-      .col-6.col-md-4 Third party
-
-  footer
 
 
   script
