@@ -3,8 +3,8 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
-a {
-  color: #00B7FF; }
+.navbar.navbar-expand-lg.navbar-light.bg-dark {
+  color: white; }
 
 .label.label-default {
   font-family: 'Bungee Inline', cursive;
@@ -15,5 +15,11 @@ a {
 
 .navbar-collapse.collapse.show .dropdown-item {
   text-align: center; }
+
+#homelink {
+  color: white; }
+
+#navbarDropdownMenuLink {
+  color: white; }
 
 /*# sourceMappingURL=style.css.map */
