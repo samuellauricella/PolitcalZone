@@ -1,18 +1,31 @@
-var express = require('express');
-var path = require('path');
+const express = require('express');
+const path = require('path');
 var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var sassMiddleware = require('node-sass-middleware');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const sassMiddleware = require('node-sass-middleware');
+const errorHandlers = require('./handlers/errorHandlers');
+const flash = require('connect-flash');
+const session = require('express-session');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+/////////////// IMPORTING ROUTES//////////////////////////////
 
-var app = express();
+const routes = require("./routes/index")
+
+const app = express();
+
+app.use(cookieParser());
+app.use(session({
+  secret: process.env.SECRET,
+  cookie: { maxAge: 60000},
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(flash())
 
 // view engine setup
-app.set('views', [__dirname + '/views',__dirname + '/views/navigation',__dirname + '/views/content',__dirname + '/views/footer']);
+app.set('views', [__dirname + '/views',__dirname + '/views/navigation',__dirname + '/views/content',__dirname + '/views/footer',,__dirname + '/views/mixins']);
 // app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
@@ -20,8 +33,8 @@ app.set('view engine', 'pug');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(sassMiddleware({
   src: path.join(__dirname, 'public'),
   dest: path.join(__dirname, 'public'),
@@ -29,28 +42,39 @@ app.use(sassMiddleware({
   sourceMap: true
 }));
 app.use(express.static(path.join(__dirname, 'public')));
+// 
 
+
+app.use((req,res,next)=>{
+  res.locals.flashes = req.flash()
+  next()
+})
 
 ////////////// THIS IS WHERE WE ARE SETTING PATHS ///////////////////////////
-app.use('/', index);
-app.use('/users', users);
+app.use('/', routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
 // error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+// If that above routes didnt work, we 404 them and forward to error handler
+app.use(errorHandlers.notFound);
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
+// One of our error handlers will see if these errors are just validation errors
+app.use(errorHandlers.flashValidationErrors);
+
+// Otherwise this was a really bad error we didn't expect! Shoot eh
+if (app.get('env') === 'development') {
+  /* Development Error Handler - Prints stack trace */
+  app.use(errorHandlers.developmentErrors);
+}
+
+// production error handler
+app.use(errorHandlers.productionErrors);
+
 
 module.exports = app;
