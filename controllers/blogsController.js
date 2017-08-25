@@ -2,16 +2,12 @@
 const mongoose = require('mongoose')
 const Article = mongoose.model('Article')
 
-//We switched this with get articles
-// exports.homePage = (req,res)=>{
-//     console.log('Home page')
-//     res.render('index', { success: req.flash('success') })
-// }
-
+///form for both adding and editing//////
 exports.addArticle = (req, res)=>{
     res.render('editArticle', { title: 'Add Article'})
 }
 
+//////// Saving article/////////
 exports.createArticle = async (req, res)=>{
         try{
             const article = await (new Article(req.body)).save()
@@ -22,6 +18,7 @@ exports.createArticle = async (req, res)=>{
         }
 };
 
+//////////////// AKA HOME PAGE///////////
 exports.getArticles = async (req, res) =>{
     try{
        const articles = await Article.find();
