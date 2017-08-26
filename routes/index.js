@@ -7,4 +7,5 @@ const {catchErrors} = require('../handlers/errorHandlers')
 router.get('/', blogsController.getArticles)
 router.get('/add',blogsController.addArticle)
 router.post('/add', blogsController.createArticle)
+
 module.exports = router;
