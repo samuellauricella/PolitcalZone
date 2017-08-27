@@ -15,8 +15,8 @@ exports.createArticle = async (req, res)=>{
         try{
             const article = await (new Article(req.body)).save()
             req.flash('success', `Successfully created article`)
-            // res.redirect(`/article/${article.slug}`)
-            res.redirect('/')
+            res.redirect(`/article/${article.slug}`)
+            // res.redirect('/')
         }catch(error){
             throw error
         }

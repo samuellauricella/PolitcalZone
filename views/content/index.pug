@@ -5,17 +5,6 @@ block content
   h1.label.label-default THE POLITICAL ZONE
 
   hr
-  block messages
-    if locals.flashes
-      .inner
-        .flash-messages
-          - const categories = Object.keys(locals.flashes)
-          p #{categories}
-          each category in categories
-            each message in flashes[category]
-              .flash.row(class=`alert alert-${category}`)
-                p.col!= message
-                button.btn.btn-light.col-1(onClick="this.parentElement.remove()") &times;
   .container-fluid
     .row.justify-content-center
         #carouselExampleControls.carousel.slide(data-ride="carousel" style="width: 100rem")

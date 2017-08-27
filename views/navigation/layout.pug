@@ -27,6 +27,16 @@ html
           li.nav-item.active
             a.nav-link(href="#") 
 
+    block messages
+    if locals.flashes
+      .inner
+        .flash-messages
+          - const categories = Object.keys(locals.flashes)
+          each category in categories
+            each message in flashes[category]
+              .flash.row(class=`alert alert-${category}`)
+                p.col!= message
+                button.btn.btn-light.col-1(onClick="this.parentElement.remove()") &times;
 
     block content
     
