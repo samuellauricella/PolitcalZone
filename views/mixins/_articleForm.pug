@@ -1,16 +1,16 @@
 mixin articleForm(article = {})
-    form(action="/add" method="POST")
+    form(action=`/add/${article._id || ''}` method="POST")
         label(for="name") Name
-        input(type="text" name="name")
+        input(type="text" name="name" value=article.name)
         label(for="description") Description
-        textarea(type="text" name="description")
+        textarea(type="text" name="description")=article.description
         label(for="content") Content
-        textarea(type="text" name="content")
+        textarea(type="text" name="content")=article.content
         - const choices = ['Liberal', 'Conservative', 'Third Party']
-
+        - const tags = article.tags || []
         ul.tags
             each choice in choices 
                 .tag
-                    input(type="checkbox" id=choice value=choice name="tags")
+                    input(type="checkbox" id=choice value=choice name="tags" checked=(tags.includes(choice)))
                     label(for=choice) #{choice}
         input(type="submit" value="Save" class="button")    

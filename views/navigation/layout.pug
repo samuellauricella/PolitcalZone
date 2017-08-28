@@ -6,22 +6,22 @@ html
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous")
     meta(name="viewport" content="width=device-width, initial-scale=1")
   body
-    nav.navbar.navbar-expand-lg.navbar-light.bg-dark
+    nav.navbar.navbar-expand-lg(style="background-color: #303030")
       a.navbar-brand
-        img(src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" width="30" height="30")
+        img(src="http://www.haitian-truth.org/wp-content/uploads/2010/11/Republicanlogo-300x260.png" width="30" height="30")
       button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarNavDropdown")
-        span.navbar-toggler-icon
+        span.navbar-toggler-icon.white
       .collapse.navbar-collapse#navbarNavDropdown
         ul.navbar-nav
           li.nav-item.active
-            a.nav-link#homelink(href="#") Home
+            a.nav-link#homelink(href="/") Home
           li.nav-item
             a.nav-link#homelink(href="#") Contact
           li.nav-item.dropdown
             a.nav-link.dropdown-toggle#navbarDropdownMenuLink(data-toggle="dropdown") Parties
             .dropdown-menu
-              a.dropdown-item Liberal Zone
-              a.dropdown-item Conservative Zone      
+              a.dropdown-item(href="#") Liberal Zone
+              a.dropdown-item(href="/republican") Conservative Zone    
       .collapse.navbar-collapse#navbar-collapse
         ul.navbar-nav.mr-auto
           li.nav-item.active
@@ -41,7 +41,7 @@ html
     block content
     
     footer.footer
-      .container
+      .container(id="footer")
         span.text-muted Place sticky footer here
 
   script
