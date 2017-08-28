@@ -25,7 +25,7 @@ app.use(session({
 app.use(flash())
 
 // view engine setup
-app.set('views', [__dirname + '/views',__dirname + '/views/navigation',__dirname + '/views/content',__dirname + '/views/footer',,__dirname + '/views/mixins']);
+app.set('views', [__dirname + '/views',__dirname + '/views/navigation',__dirname + '/views/content',__dirname + '/views/footer',__dirname + '/views/mixins']);
 // app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 

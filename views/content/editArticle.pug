@@ -2,6 +2,6 @@ extends ../navigation/layout
 include ../mixins/_articleForm
 
 
-block content 
-    h1 It works
-    +articleForm()
+block content
+	h1= title
+	+articleForm(article)
