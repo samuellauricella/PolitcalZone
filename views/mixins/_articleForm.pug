@@ -1,9 +1,16 @@
 mixin articleForm(article = {})
-    form(action=`/add/${article._id || ''}` method="POST")
+    form(action=`/add/${article._id || ''}` method="POST" enctype="multipart/form-data")
         label(for="name") Name
         input(type="text" name="name" value=article.name)
         label(for="description") Description
         textarea(type="text" name="description")=article.description
+
+        //- Image upload
+
+        label(for="photo") Photo
+            input(type="file" name="photo" id="photo" accept="image/gif,image/png, image/jpeg")
+            if article.photo
+                img(src=`/uploads/${article.photo}`, alt=article.name width=200)
         label(for="content") Content
         textarea(type="text" name="content")=article.content
         - const choices = ['Liberal', 'Conservative', 'Third Party']

@@ -1,17 +1,53 @@
 // Make middleware to push blog content to homepage
 const mongoose = require('mongoose')
 const Article = mongoose.model('Article')
+const multer = require('multer')
+const jimp = require('jimp')
+const uuid = require('uuid')
 
-exports.homePage = (req,res)=>{
+
+const multerOptions = {
+    storage: multer.memoryStorage(),
+    fileFilter: function(req, file, next){
+        const isPhoto = file.mimetype.startsWith('image/')
+        if(isPhoto){
+            next(null,true)
+        }else{
+            next({message: 'That filetype is not allowed'}, false)
+        }
+    }
+}
+
+
+exports.homePage = (req,res) => {
     console.log('Home page')
     res.render('index', { success: req.flash('success') })
 }
 
-exports.addArticle = (req, res)=>{
+exports.addArticle = (req, res) => {
     res.render('editArticle', { title: 'Add Article'})
 }
 
-exports.createArticle = async (req, res)=>{
+exports.upload = multer(multerOptions).single('photo')
+
+exports.resize = async (req, res, next) => {
+    try{
+        if(!req.file){
+            next();
+            return
+        }
+        const extension = req.file.mimetype.split('/')[1]
+        req.body.photo = `${uuid.v4()}.${extension}`
+        const photo = await jimp.read(req.file.buffer)
+        await photo.resize(800, jimp.AUTO)
+        await photo.write(`./public/uploads/${req.body.photo}`)
+        next()
+    }catch(error){
+        throw error
+    }
+}
+
+exports.createArticle = async (req, res) => {
         try{
             const article = await (new Article(req.body)).save()
             req.flash('success', `Successfully created article`)
@@ -22,7 +58,7 @@ exports.createArticle = async (req, res)=>{
         }
 };
 
-exports.getArticles = async (req, res) =>{
+exports.getArticles = async (req, res) => {
     try{
        const articles = await Article.find();
        console.log(articles)
@@ -32,7 +68,7 @@ exports.getArticles = async (req, res) =>{
     }
 }
 
-exports.getRepublican = async (req, res) =>{
+exports.getRepublican = async (req, res) => {
     try{
        const articles = await Article.find();
        console.log(articles)
@@ -42,7 +78,7 @@ exports.getRepublican = async (req, res) =>{
     }
 }
 
-exports.editArticle = async (req, res) =>{
+exports.editArticle = async (req, res) => {
     try{
         const article = await Article.findOne({_id:req.params.id})
         res.render('editArticle', {title: `Edit ${article.name}`, article})
@@ -51,7 +87,7 @@ exports.editArticle = async (req, res) =>{
     }
 }
 
-exports.updateArticle = async (req,res) =>{
+exports.updateArticle = async (req,res) => {
     try{
         const article = await Article.findOneAndUpdate({_id: req.params.id},req.body, {
             new: true,

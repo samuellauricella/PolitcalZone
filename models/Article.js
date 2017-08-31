@@ -19,7 +19,12 @@ const articleSchema = new mongoose.Schema({
         trim: true,
         required: 'Please enter article content'
     },
-    tags: [String]
+    tags: [String],
+    created:{
+        type: Date,
+        default: Date.now
+    },
+    photo: String
 })
 
 
