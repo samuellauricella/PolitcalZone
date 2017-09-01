@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Bungee+Inline|Poiret+One");
 body {
   padding: 0px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+  font: 15px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
 .label.label-default {
   font-family: 'Bungee Inline', cursive;
@@ -14,10 +14,10 @@ body {
   text-align: center; }
 
 #homelink {
-  color: white; }
+  color: black; }
 
 #navbarDropdownMenuLink {
-  color: white; }
+  color: black; }
 
 .footer {
   background-color: #303030; }

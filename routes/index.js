@@ -24,4 +24,5 @@ router.post('/add/:id',
 
 router.get('/:id/edit', blogsController.editArticle)
 
+router.get('/article/:slug', blogsController.getArticleBySlug)
 module.exports = router;

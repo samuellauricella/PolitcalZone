@@ -99,3 +99,9 @@ exports.updateArticle = async (req,res) => {
         throw error
     }
 }
+
+exports.getArticleBySlug = async (req, res, next) =>{
+    const article = await Article.findOne({slug: req.params.slug})
+    if(!article) return next()
+    res.render('article', {article, title: article.name})
+}

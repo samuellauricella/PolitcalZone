@@ -3,32 +3,35 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous")
-    link(rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/octicons/4.4.0/font/octicons.svg")
     meta(name="viewport" content="width=device-width, initial-scale=1")
   body
     //- ////////////////////////// Navbar Version
 
     nav.navbar.navbar-expand-lg(style="background-color: #303030")
+      a.navbar-brand
+        img(src="http://www.adweek.com/wp-content/uploads/sites/2/2016/07/DemocraticDonkeyVsRepublicanElephant.jpg" width="90rem")
+        span The Political Zone
       button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarNavDropdown")
-        span.navbar-toggler-icon.white
+        i.fa.fa-bars
+
+
       .collapse.navbar-collapse#navbarNavDropdown
         ul.navbar-nav
-          li.nav-item.active
+          li.nav-item
             a.nav-link#homelink(href="/") Home
           li.nav-item
             a.nav-link#homelink(href="#") Contact
+          li.nav-item
+            a.nav-link(href="/add") Add
+
           li.nav-item.dropdown
             a.nav-link.dropdown-toggle#navbarDropdownMenuLink(data-toggle="dropdown") Parties
             .dropdown-menu
               a.dropdown-item(href="#") Liberal Zone
               a.dropdown-item(href="/republican") Conservative Zone
       .container
-        a.navbar-brand
-          img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Republicanlogo.svg/1179px-Republicanlogo.svg.png" width="50rem")
-        h1(style="font-size: 30px; color:white") The political Zone
-        a.navbar-brand
-          img(src="https://vignette2.wikia.nocookie.net/residentevil/images/7/70/Democratic-donkey.png/revision/latest?cb=20120324002027" width="50rem")
       .collapse.navbar-collapse#navbar-collapse
         ul.navbar-nav.mr-auto
           li.nav-item.active
@@ -56,3 +59,4 @@ html
     script(src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous")
     script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous")
+    script(src="https://use.fontawesome.com/444917fc3e.js")
