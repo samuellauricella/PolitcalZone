@@ -58,6 +58,7 @@ exports.createArticle = async (req, res) => {
         }
 };
 
+///HOMEPAGE ARTICLES
 exports.getArticles = async (req, res) => {
     try{
        const articles = await Article.find();
@@ -68,16 +69,22 @@ exports.getArticles = async (req, res) => {
     }
 }
 
-exports.getRepublican = async (req, res) => {
+// ARTICLES PAGE
+exports.getArticlesByTag = async (req,res)=>{
     try{
-       const articles = await Article.find();
-       console.log(articles)
-        res.render('republican',{articles})
-    } catch (error){
+        const tag = req.params.tag
+        const tagQuery = tag || { $exists: true}
+        const tagsPromise = await Article.getTagsList()
+        const articlesPromise = Article.find({tags:tagQuery})
+
+        const [tags, articles] = await Promise.all([tagsPromise, articlesPromise])
+        res.render('articles', {tags, title: 'Title', tag,articles})
+    }catch(error){
         throw error
     }
 }
 
+// ARTICLES EDIT
 exports.editArticle = async (req, res) => {
     try{
         const article = await Article.findOne({_id:req.params.id})
@@ -87,6 +94,7 @@ exports.editArticle = async (req, res) => {
     }
 }
 
+// ARTICLES UPDATE
 exports.updateArticle = async (req,res) => {
     try{
         const article = await Article.findOneAndUpdate({_id: req.params.id},req.body, {
@@ -100,8 +108,11 @@ exports.updateArticle = async (req,res) => {
     }
 }
 
+// INDI ARTICLE PAGE
 exports.getArticleBySlug = async (req, res, next) =>{
     const article = await Article.findOne({slug: req.params.slug})
     if(!article) return next()
     res.render('article', {article, title: article.name})
 }
+
+

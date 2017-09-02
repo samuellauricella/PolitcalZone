@@ -5,7 +5,18 @@ const {catchErrors} = require('../handlers/errorHandlers')
 
 /* GET home page. */
 router.get('/', blogsController.getArticles)
-router.get('/republican', blogsController.getRepublican)
+
+
+router.get('/articles', blogsController.getArticlesByTag)
+router.get('/articles/:tag', blogsController.getArticlesByTag)
+
+
+// This is from the example not using tags page, just articles
+// router.get('/tags', blogsController.getArticlesByTag)
+
+// router.get('/tags/:tag', blogsController.getArticlesByTag)
+
+
 router.get('/add',blogsController.addArticle)
 
 
