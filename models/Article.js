@@ -1,6 +1,7 @@
 const mongoose= require('mongoose')
+const slug = require('slug')
 mongoose.Promise = global.Promise
-const slug = require('slugs')
+
 
 const articleSchema = new mongoose.Schema({
     name:{
@@ -29,20 +30,18 @@ const articleSchema = new mongoose.Schema({
 
 
 articleSchema.pre('save', async function(next){
-
     try{
-    if(!this.isModified('name')){
-        next()
-        return;
-    }
-    this.slug = slug(this.name)
+        this.slug = slug(this.name)
 
-    const slugRegEx = new RegExp(`^(${this.slug})((-[0-9]*$)?)$`,'i')
+        console.log(this.slug)
 
-    const articlesWithSlug = await this.constructor.find({slug: slugRegEx})
+        const slugRegEx = new RegExp(`^(${this.slug})((-[0-9]*$)?)$`,'i')
 
-    if(articlesWithSlug.length){
-      this.slug = `${this.slug}-${articlesWithSlug.length + 1}`
+        const articlesWithSlug = await this.constructor.find({slug: slugRegEx})
+
+        if(articlesWithSlug.length){
+          this.slug = `${this.slug}-${articlesWithSlug.length + 1}`
+
     }
     next()
     }catch(error){
@@ -50,11 +49,13 @@ articleSchema.pre('save', async function(next){
     }
 })
 
+
+
 articleSchema.statics.getTagsList = function(){
     return this.aggregate([
         { $unwind: '$tags'},
         { $group: {_id: '$tags', count: {$sum:1}}},
-        { $sort: {count: -1}}
+        {$sort: {count: -1}}
     ])
 }
 

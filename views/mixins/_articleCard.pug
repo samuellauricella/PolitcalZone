@@ -1,15 +1,35 @@
 mixin articleCard(article={})
-	.container(style="width:45.88rem")
-		.card.mb-3
-			img.card-img-top(src=`/uploads/${article.photo}`)
-			.card-body
-				h4.card-title= article.name
-				p.card-text=article.description
-				p.card-text
-					small.text-muted
-						a(href=`/article/${article.slug}`) Read More
-				button.button
-					a(href=`/${article._id}/edit`) Edit
-				
-				a.btn-btn-info-btn-lg(href="..")
-					span.glyphicon.glyphicon-pencil Pencil
+	br
+	.container.fluid(style="background-color: transparent !important")
+		.card.card-blog
+			.row
+				.col-lg-4.col-md-5.col-sm-2
+					.card-image(style="width: 15rem; height: auto")
+						a(href='#')
+							img.img(src=`/uploads/${article.photo}`, alt='')
+						.ripple-cont
+				.row(style="overflow:hidden !important")
+					.w-100
+					.col
+						.table
+							if article.tags
+								h6.category.text-success
+									i.fa.fa-university #{article.tags}
+							h4.card-caption
+								a(href='#') #{article.name}
+							.cdescription
+								p.card-description
+								| #{article.description}
+							.ftr
+								.author
+									a(href='#')
+										img.avatar.img-raised(src='images/3.png', alt='...')
+										span Mary Dunst
+			.row.justify-content-end
+				.col-lg-2.col-md-2.col-sm-4
+				.col-lg-4.col-md-5.col-sm-4.justify-content-end
+					.stats
+						i.fa.fa-clock-o
+						|  10 min
+						a.btn.btn-danger.btn-round(href=`/article/${article.slug}`) Read More
+						a.btn.btn-warning.btn-round(href=`/${article._id}/edit`) Edit

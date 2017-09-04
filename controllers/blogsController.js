@@ -4,7 +4,7 @@ const Article = mongoose.model('Article')
 const multer = require('multer')
 const jimp = require('jimp')
 const uuid = require('uuid')
-
+const slug = require('slug')
 
 const multerOptions = {
     storage: multer.memoryStorage(),
@@ -43,7 +43,7 @@ exports.resize = async (req, res, next) => {
         await photo.write(`./public/uploads/${req.body.photo}`)
         next()
     }catch(error){
-        throw error
+        return console.log(error)
     }
 }
 
@@ -52,9 +52,8 @@ exports.createArticle = async (req, res) => {
             const article = await (new Article(req.body)).save()
             req.flash('success', `Successfully created article`)
             res.redirect(`/article/${article.slug}`)
-            // res.redirect('/')
         }catch(error){
-            throw error
+             return await console.log(error)
         }
 };
 
@@ -65,7 +64,7 @@ exports.getArticles = async (req, res) => {
        console.log(articles)
         res.render('index',{articles})
     } catch (error){
-        throw error
+        return await console.log(error)
     }
 }
 
@@ -80,7 +79,7 @@ exports.getArticlesByTag = async (req,res)=>{
         const [tags, articles] = await Promise.all([tagsPromise, articlesPromise])
         res.render('articles', {tags, title: 'Title', tag,articles})
     }catch(error){
-        throw error
+        return console.log(error)
     }
 }
 
@@ -90,21 +89,37 @@ exports.editArticle = async (req, res) => {
         const article = await Article.findOne({_id:req.params.id})
         res.render('editArticle', {title: `Edit ${article.name}`, article})
     }catch(error){
-        throw error
+         return error
     }
 }
 
 // ARTICLES UPDATE
 exports.updateArticle = async (req,res) => {
     try{
-        const article = await Article.findOneAndUpdate({_id: req.params.id},req.body, {
+        
+        const article= await Article.findOneAndUpdate({_id: req.params.id}, req.body,{
             new: true,
             runValidators: true
         }).exec()
-        req.flash('success', `Successfully updated ${article.name}. <a href="/${article.slug}"> View Article</a>`)
+
+        // const article = await Article.findOneAndUpdate({_id: req.params.id}, {
+        //         name: req.body.name,
+        //         description: req.body.description,
+        //         content: req.body.content,
+        //         photo:req.body.photo,
+        //         tags: req.body.tags,
+        //         slug: slug(req.body.name)
+            
+        // },{
+        //     new: true,
+        //     runValidators: true
+        // }).exec()
+        req.flash('success', `Successfully updated ${article.name}. <a href="/article/${article.slug}"> View Article</a>`)
+        // res.json(article)
+        // res.json(article)
         res.redirect(`/${article._id}/edit`)
     }catch(error){
-        throw error
+          return await console.log(error)
     }
 }
 
