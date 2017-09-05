@@ -26,10 +26,14 @@ html
           li.nav-item
             a.nav-link(href="/add") Add Article
         ul.nav.justify-content-right
-          li.nav-item
-            a.nav-link(href="/login") Sign in
-          li.nav-item
-            a.nav-link(href="/register") Register
+          if user
+            li.nav-item
+              a.nav-link(href="/logout") Logout
+          else
+            li.nav-item
+              a.nav-link(href="/login") Sign in
+            li.nav-item
+              a.nav-link(href="/register") Register
 
 
 
