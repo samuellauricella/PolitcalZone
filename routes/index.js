@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 const blogsController = require('../controllers/blogsController')
+const userController = require('../controllers/userController')
+
 const {catchErrors} = require('../handlers/errorHandlers')
 
 /* GET home page. */
@@ -36,4 +38,14 @@ router.post('/add/:id',
 router.get('/:id/edit', blogsController.editArticle)
 
 router.get('/article/:slug', blogsController.getArticleBySlug)
+
+
+router.get('/login', userController.loginForm)
+router.get('/register', userController.registerForm)
+
+// 1.validate registration data
+// 2. Register user
+// 3. Login
+router.post('/register', userController.validateRegister )
+
 module.exports = router;
