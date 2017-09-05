@@ -1,8 +1,9 @@
 const express = require('express');
 const path = require('path');
-var favicon = require('serve-favicon');
+const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
+const expressValidator = require('express-validator')
 const bodyParser = require('body-parser');
 const sassMiddleware = require('node-sass-middleware');
 const errorHandlers = require('./handlers/errorHandlers');
@@ -16,6 +17,8 @@ const routes = require("./routes/index")
 const app = express();
 
 app.use(cookieParser());
+app.use(expressValidator());
+
 app.use(session({
   secret: process.env.SECRET,
   cookie: { maxAge: 60000},

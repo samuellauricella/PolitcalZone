@@ -21,7 +21,7 @@ const multerOptions = {
 
 exports.homePage = (req,res) => {
     console.log('Home page')
-    res.render('index', { success: req.flash('success') })
+    res.render('index', { success: req.flash('success'), title:'The Political Zone' })
 }
 
 exports.addArticle = (req, res) => {
@@ -77,7 +77,7 @@ exports.getArticlesByTag = async (req,res)=>{
         const articlesPromise = Article.find({tags:tagQuery})
 
         const [tags, articles] = await Promise.all([tagsPromise, articlesPromise])
-        res.render('articles', {tags, title: 'Title', tag,articles})
+        res.render('articles', {tags, title: 'The Political Zone', tag,articles})
     }catch(error){
         return console.log(error)
     }

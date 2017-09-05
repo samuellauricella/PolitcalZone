@@ -30,7 +30,7 @@
       .tag__choice input:checked + label {
         background: #FFC40E; }
   .tag__link {
-    background: #FFC40E;
+    background: white;
     color: #303030;
     display: -ms-flexbox;
     display: flex;
@@ -38,7 +38,7 @@
     -webkit-clip-path: polygon(10px 0%, 100% 1%, 100% 100%, 10px 100%, 0% 50%);
             clip-path: polygon(10px 0%, 100% 1%, 100% 100%, 10px 100%, 0% 50%); }
     .tag__link--active {
-      background: #827cd2; }
+      background: #CC1A17; }
       .tag__link--active .tag__text {
         color: white; }
   .tag__text {

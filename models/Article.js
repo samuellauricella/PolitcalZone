@@ -3,6 +3,7 @@ const slug = require('slug')
 mongoose.Promise = global.Promise
 
 
+
 const articleSchema = new mongoose.Schema({
     name:{
         type: String,

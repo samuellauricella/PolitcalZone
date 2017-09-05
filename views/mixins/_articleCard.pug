@@ -4,9 +4,8 @@ mixin articleCard(article={})
 		.card.card-blog
 			.row
 				.col-lg-4.col-md-5.col-sm-2
-					.card-image(style="width: 15rem; height: auto")
-						a(href='#')
-							img.img(src=`/uploads/${article.photo}`, alt='')
+					.card-image(style="width: 100%; height:auto")
+						img.img(src=`/uploads/${article.photo || 'article.jpeg'} `, alt='')
 						.ripple-cont
 				.row(style="overflow:hidden !important")
 					.w-100
@@ -15,8 +14,7 @@ mixin articleCard(article={})
 							if article.tags
 								h6.category.text-success
 									i.fa.fa-university #{article.tags}
-							h4.card-caption
-								a(href='#') #{article.name}
+							h4.card-caption #{article.name}
 							.cdescription
 								p.card-description
 								| #{article.description}
