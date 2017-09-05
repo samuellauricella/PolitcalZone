@@ -20,7 +20,9 @@ router.get('/articles/:tag', blogsController.getArticlesByTag)
 // router.get('/tags/:tag', blogsController.getArticlesByTag)
 
 
-router.get('/add',blogsController.addArticle)
+router.get('/add',
+	authController.isLoggedIn,
+	blogsController.addArticle)
 
 
 router.post('/add',
@@ -42,6 +44,7 @@ router.get('/article/:slug', blogsController.getArticleBySlug)
 
 
 router.get('/login', userController.loginForm)
+router.post('/login', authController.login)
 router.get('/register', userController.registerForm)
 
 // 1.validate registration data
@@ -51,5 +54,7 @@ router.post('/register',
 	userController.validateRegister,
 	userController.register,
 	authController.login )
+
+router.get('/logout', authController.logout)
 
 module.exports = router;

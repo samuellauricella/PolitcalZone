@@ -29,6 +29,8 @@ html
           if user
             li.nav-item
               a.nav-link(href="/logout") Logout
+            li.nav-item
+              img.avatar(src=user.gravatar)
           else
             li.nav-item
               a.nav-link(href="/login") Sign in
