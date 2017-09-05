@@ -4,6 +4,9 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const expressValidator = require('express-validator')
+const promisify = require('es6-promisify');
+const passport = require('passport');
+
 const bodyParser = require('body-parser');
 const sassMiddleware = require('node-sass-middleware');
 const errorHandlers = require('./handlers/errorHandlers');
@@ -13,6 +16,7 @@ const session = require('express-session');
 /////////////// IMPORTING ROUTES//////////////////////////////
 
 const routes = require("./routes/index")
+require('./handlers/passport')
 
 const app = express();
 
@@ -25,7 +29,26 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }));
+
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(flash())
+
+
+// pass variables to our templates + all requests
+app.use((req, res, next) => {
+  res.locals.flashes = req.flash();
+  res.locals.user = req.user || null;
+  res.locals.currentPath = req.path;
+  next();
+});
+
+
+// promisify some callback based APIs
+app.use((req, res, next) => {
+  req.login = promisify(req.login, req);
+  next();
+});
 
 // view engine setup
 app.set('views', [__dirname + '/views',__dirname + '/views/navigation',__dirname + '/views/content',__dirname + '/views/footer',__dirname + '/views/mixins']);
@@ -48,10 +71,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 // 
 
 
-app.use((req,res,next)=>{
-  res.locals.flashes = req.flash()
-  next()
-})
 
 ////////////// THIS IS WHERE WE ARE SETTING PATHS ///////////////////////////
 app.use('/', routes);
