@@ -1,15 +1,25 @@
 extends ../navigation/layout
 
 block content
-	.inner
-		form.form(action="/register" method="POST")
-			h2 Register
-			label(for="name") Name
-			input(type="text" name="name" required)
-			label(for="email") Email
-			input(type="email" name="email" required)
-			label(for="password") Password
-			input(type="password" name="password" required)
-			label(for="password-confirm") Confirm Password
-			input(type="password" name="password-confirm" required)
-			input.button(type="submit" value="Register")
+	br
+	.container
+		.row.align-items-start
+			.col-6.col-md-6
+				img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Uncle_Sam_%28pointing_finger%29.png/571px-Uncle_Sam_%28pointing_finger%29.png" width="300")
+			.col-12.col-sm-4.col-md-6
+				br
+				h4 Log In
+				hr
+				form.form(action="/register" method="POST")
+					.form-group
+						label(for="name") Name
+						input.form-control(type="text" name="name" required autofocus)
+						label(for="email") Email
+						input.form-control(type="email" name="email" required)
+						label(for="password") Password
+						input.form-control(type="password" name="password" required)
+						label(for="password-confirm") Confirm Password
+						input.form-control(type="password" name="password-confirm" required)
+						.container
+							.row.justify-content-end
+								input.btn.btn-primary(type="submit" value=" Register")

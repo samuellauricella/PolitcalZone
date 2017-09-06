@@ -11,16 +11,15 @@ const multerOptions = {
     fileFilter: function(req, file, next){
         const isPhoto = file.mimetype.startsWith('image/')
         if(isPhoto){
-            next(null,true)
+            return next(null,true)
         }else{
-            next({message: 'That filetype is not allowed'}, false)
+            return next({message: 'That filetype is not allowed'}, false)
         }
     }
 }
 
 
 exports.homePage = (req,res) => {
-    console.log('Home page')
     res.render('index', { success: req.flash('success'), title:'The Political Zone' })
 }
 
@@ -41,9 +40,9 @@ exports.resize = async (req, res, next) => {
         const photo = await jimp.read(req.file.buffer)
         await photo.resize(800, jimp.AUTO)
         await photo.write(`./public/uploads/${req.body.photo}`)
-        next()
+        return next()
     }catch(error){
-        return console.log(error)
+        return error
     }
 }
 
@@ -53,7 +52,9 @@ exports.createArticle = async (req, res) => {
             req.flash('success', `Successfully created article`)
             res.redirect(`/article/${article.slug}`)
         }catch(error){
-             return await console.log(error)
+            req.flash('error', `Unable to create ${article.name}.`)
+            res.render('back')
+            return error
         }
 };
 
@@ -61,10 +62,11 @@ exports.createArticle = async (req, res) => {
 exports.getArticles = async (req, res) => {
     try{
        const articles = await Article.find();
-       console.log(articles)
         res.render('index',{articles})
     } catch (error){
-        return await console.log(error)
+        req.flash('error', `Unable to get articles at this time}.`)
+        res.render('back')
+        return error
     }
 }
 
@@ -79,7 +81,9 @@ exports.getArticlesByTag = async (req,res)=>{
         const [tags, articles] = await Promise.all([tagsPromise, articlesPromise])
         res.render('articles', {tags, title: 'The Political Zone', tag,articles})
     }catch(error){
-        return console.log(error)
+        req.flash('error', `Unable to get articles at this time}.`)
+        res.render('back')
+        return error
     }
 }
 
@@ -89,7 +93,9 @@ exports.editArticle = async (req, res) => {
         const article = await Article.findOne({_id:req.params.id})
         res.render('editArticle', {title: `Edit ${article.name}`, article})
     }catch(error){
-         return error
+        console.log(error)
+         req.flash('error', 'Unable to update article')
+         res.render('back')
     }
 }
 
@@ -97,29 +103,27 @@ exports.editArticle = async (req, res) => {
 exports.updateArticle = async (req,res) => {
     try{
         
-        const article= await Article.findOneAndUpdate({_id: req.params.id}, req.body,{
+        const updates = {
+            name: req.body.name,
+            description: req.body.description,
+            content: req.body.content,
+            tags: req.body.tags,
+            slug: slug(req.body.name),
+            photo: req.body.photo
+        }
+        const article= await Article.findOneAndUpdate({_id: req.params.id}, {$set: updates},{
             new: true,
-            runValidators: true
+            runValidators: true,
+            context: 'query'
         }).exec()
 
-        // const article = await Article.findOneAndUpdate({_id: req.params.id}, {
-        //         name: req.body.name,
-        //         description: req.body.description,
-        //         content: req.body.content,
-        //         photo:req.body.photo,
-        //         tags: req.body.tags,
-        //         slug: slug(req.body.name)
-            
-        // },{
-        //     new: true,
-        //     runValidators: true
-        // }).exec()
         req.flash('success', `Successfully updated ${article.name}. <a href="/article/${article.slug}"> View Article</a>`)
-        // res.json(article)
-        // res.json(article)
+
         res.redirect(`/${article._id}/edit`)
     }catch(error){
-          return await console.log(error)
+        console.log(error)
+         req.flash('error', 'Unable to update article')
+         res.render('back')
     }
 }
 

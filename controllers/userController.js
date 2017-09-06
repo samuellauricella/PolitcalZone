@@ -30,7 +30,7 @@ exports.validateRegister = (req,res,next)=>{
 		res.render('register', {title: 'Register', body: req.body, flashes: req.flash()})
 		return
 	}
-	next()
+	return next()
 }
 
 exports.register = async(req,res,next)=>{
@@ -38,4 +38,29 @@ exports.register = async(req,res,next)=>{
 	const register = promisify(User.register, User)
 	await register(user, req.body.password)
 	next()
+}
+
+exports.account = (req, res) =>{
+	res.render('account', {title: 'Account'})
+}
+
+exports.updateAccount = async (req,res) =>{
+	try{
+		const updates = {
+			name: req.body.name,
+			email: req.body.email
+		}
+
+		const user = await User.findOneAndUpdate(
+			{_id: req.user._id},
+			{$set: updates},
+			{new: true, runValidators: true, context: 'query'}
+			)
+		req.flash('success', 'Successfully updated profile')
+		res.redirect('back')
+	}catch(error){
+		req.flash('error', `Unable to update profile}.`)
+        res.render('back')
+        return error
+	}
 }
