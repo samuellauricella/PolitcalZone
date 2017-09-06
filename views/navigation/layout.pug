@@ -30,7 +30,8 @@ html
             li.nav-item
               a.nav-link(href="/logout") Logout
             li.nav-item
-              img.avatar(src=user.gravatar)
+              a.accounts(href="/account")
+                img.avatar(src=user.gravatar style="width: 40px; height: auto")
           else
             li.nav-item
               a.nav-link(href="/login") Sign in
