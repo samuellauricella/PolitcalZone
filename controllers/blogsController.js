@@ -48,6 +48,7 @@ exports.resize = async (req, res, next) => {
 
 exports.createArticle = async (req, res) => {
         try{
+            req.body.author = req.user._id
             const article = await (new Article(req.body)).save()
             req.flash('success', `Successfully created article`)
             res.redirect(`/article/${article.slug}`)
@@ -88,14 +89,20 @@ exports.getArticlesByTag = async (req,res)=>{
 }
 
 // ARTICLES EDIT
+
+const confirmOwner = (article, user) =>{
+    if(!article.author.equals(user._id)){
+        throw Error('You must be the owner of this article to edit it')
+    }
+}
 exports.editArticle = async (req, res) => {
     try{
         const article = await Article.findOne({_id:req.params.id})
+        confirmOwner(article, req.user)
         res.render('editArticle', {title: `Edit ${article.name}`, article})
     }catch(error){
-        console.log(error)
-         req.flash('error', 'Unable to update article')
-         res.render('back')
+         req.flash('error', 'Unable to edit article, Please make sure you are the owner of this article')
+         res.redirect('back')
     }
 }
 
@@ -129,7 +136,8 @@ exports.updateArticle = async (req,res) => {
 
 // INDI ARTICLE PAGE
 exports.getArticleBySlug = async (req, res, next) =>{
-    const article = await Article.findOne({slug: req.params.slug})
+    const article = await Article.findOne({slug: req.params.slug}).populate('author')
+
     if(!article) return next()
     res.render('article', {article, title: article.name})
 }

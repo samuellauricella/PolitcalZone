@@ -23,7 +23,15 @@ require('./handlers/passport')
 const app = express();
 
 // view engine setup
-app.set('views', [__dirname + '/views',__dirname + '/views/navigation',__dirname + '/views/content',__dirname + '/views/footer',__dirname + '/views/mixins']);
+app.set('views', [
+  __dirname + '/views',
+  __dirname + '/views/navigation',
+  __dirname + '/views/content',
+  __dirname + '/views/footer',
+  __dirname + '/views/mixins',
+  __dirname + '/views/mixins']);
+
+
 app.set('view engine', 'pug'); // we use the engine pug, mustache or EJS work great too
 
 // serves up static files from the public folder. Anything in public/ will just be served up as the file it is

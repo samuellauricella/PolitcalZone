@@ -3,7 +3,7 @@
 body {
   padding: 0px;
   font: 15px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: #1C2E47 !important; }
+   }
 
 .container {
   background-color: white !important; }
@@ -26,9 +26,6 @@ body {
 #homeIcon {
   width: 20px;
   height: 20px; }
-
-.footer {
-  background-color: #303030; }
 
 .cdescription {
   word-wrap: break-word; }
