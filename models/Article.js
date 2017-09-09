@@ -26,7 +26,12 @@ const articleSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    photo: String
+    photo: String,
+    author: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+        required: 'You must supply an author'
+    }
 })
 
 

@@ -1,34 +1,45 @@
 mixin articleCard(article={})
 	br
-	.container.fluid(style="background-color: transparent !important")
-		.card.card-blog
-			.row
-				.col-lg-4.col-md-5.col-sm-2
-					.card-image(style="width: 100%; height:auto")
-						img.img(src=`/uploads/${article.photo || 'article.jpeg'} `, alt='')
-						.ripple-cont
-				.row(style="overflow:hidden !important")
-					.w-100
-					.col
-						.table
-							if article.tags
-								h6.category.text-success
-									i.fa.fa-university #{article.tags}
-							h4.card-caption #{article.name}
-							.cdescription
-								p.card-description
-								| #{article.description}
-							.ftr
-								.author
-									a(href='#')
-										img.avatar.img-raised(src='images/3.png', alt='...')
-										span Mary Dunst
-			.row.justify-content-end
-				.col-lg-2.col-md-2.col-sm-4
-				.col-lg-4.col-md-5.col-sm-4.justify-content-end
-					.stats
-						i.fa.fa-clock-o
-						|  10 min
-						a.btn.btn-danger.btn-round(href=`/article/${article.slug}`) Read More
-						a.btn.btn-warning.btn-round(href=`/${article._id}/edit`) Edit
+	section.section.extra-margins.pb-3.text-center.text-lg-left
+		// Section heading
+		.row
+			// Grid column
+			.col-lg-4.mb-4
+				// Featured image
+				.view.overlay.hm-white-slight.z-depth-1-half
+					img.img-fluid(src=`/uploads/${article.photo || 'article.jpeg'} `, alt='First sample image')
+					a
+						.mask
+			// Grid column
+			// Grid column
+			.col-lg-7.ml-xl-4.mb-4
+				// Excerpt
+				a.teal-text(href='')
+					h6.pb-1
+						i.fa.fa-university
+						strong  #{article.tags} 
+				h4.mb-3(style="word-wrap: break-word")
+					strong #{article.name}
+				p(style="word-wrap: break-word")
+					| #{article.description}
+				p
+					| by 
+					a
+						strong #{article.author}
+					| , 26/08/2016
+				a.btn.btn-primary.btn-sm(href=`/article/${article.slug}`) Read more
+				
+				if user && article.author.equals(user._id)
+					a.btn.btn-primary.btn-sm(href=`/${article._id}/edit`) edit
+			// Grid column
+		// Grid row
+		hr.mb-5
 
+
+	
+
+
+
+
+
+			
