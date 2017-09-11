@@ -77,4 +77,9 @@ router.post('/account/reset/:token',
 	authController.update
 	)
 
+
+// api
+
+router.get('/api/search', blogsController.searchArticles)
+
 module.exports = router;

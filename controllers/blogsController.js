@@ -5,6 +5,8 @@ const multer = require('multer')
 const jimp = require('jimp')
 const uuid = require('uuid')
 const slug = require('slug')
+const cheerio = require('cheerio')
+const pug = require('pug')
 
 const multerOptions = {
     storage: multer.memoryStorage(),
@@ -139,7 +141,27 @@ exports.getArticleBySlug = async (req, res, next) =>{
     const article = await Article.findOne({slug: req.params.slug}).populate('author')
 
     if(!article) return next()
+
     res.render('article', {article, title: article.name})
 }
 
 
+
+exports.searchArticles = async(req,res)=>{
+    try{
+    const articles = await Article
+    .find({
+        $text: {
+            $search: req.query.q
+        }
+    }, {
+        score: { $meta: 'textScore'}
+    })
+    .sort({
+        score: {$meta: 'textScore'}
+    })
+    res.json(articles)
+    }catch(errors){
+        throw Error
+    }
+}

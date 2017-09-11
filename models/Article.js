@@ -35,6 +35,13 @@ const articleSchema = new mongoose.Schema({
 })
 
 
+// define indexes
+
+articleSchema.index({
+    name: 'text',
+    description: 'text'
+})
+
 articleSchema.pre('save', async function(next){
     try{
         this.slug = slug(this.name)
