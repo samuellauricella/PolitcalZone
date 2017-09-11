@@ -27,8 +27,7 @@ block content
 								i.fa.fa-university
 									strong  #{article.tags} 
 							.excerpt.mt-5
-								p
-								| #{article.content}
+								p(style="white-space: pre")!=article.content
 							// Social shares
 						// Post data
 					// Excerpt

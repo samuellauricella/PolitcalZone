@@ -30,4 +30,14 @@ body {
 .cdescription {
   word-wrap: break-word; }
 
+
+
+.search {
+  position: relative;
+  width: 100%;
+  display: flex;
+}
+
+
+
 /*# sourceMappingURL=style.css.map */
