@@ -93,7 +93,7 @@ exports.getArticlesByTag = async (req,res)=>{
 // ARTICLES EDIT
 
 const confirmOwner = (article, user) =>{
-    if(!article.author.equals(user._id)){
+    if(!article.author.equals(user._id) && user && user.authLevel !=1  ){
         throw Error('You must be the owner of this article to edit it')
     }
 }

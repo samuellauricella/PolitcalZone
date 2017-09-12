@@ -31,6 +31,9 @@ mixin articleCard(article={})
 				
 				if user && article.author.equals(user._id)
 					a.btn.btn-primary.btn-sm(href=`/${article._id}/edit`) edit
+				
+				if user && user.authLevel==1
+					a.btn.btn-primary.btn-sm(href=`/${article._id}/edit`) edit
 			// Grid column
 		// Grid row
 		hr.mb-5
