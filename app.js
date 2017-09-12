@@ -27,6 +27,7 @@ app.set('views', [
   __dirname + '/views',
   __dirname + '/views/navigation',
   __dirname + '/views/content',
+  __dirname + '/views/admin',
   __dirname + '/views/footer',
   __dirname + '/views/mixins',
   __dirname + '/views/mixins']);

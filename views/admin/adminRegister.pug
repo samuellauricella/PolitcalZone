@@ -1,0 +1,38 @@
+extends ../navigation/layout
+
+block content
+	br
+	.container
+		.row.align-items-start
+			.col-6.col-md-6
+				img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Uncle_Sam_%28pointing_finger%29.png/571px-Uncle_Sam_%28pointing_finger%29.png" width="300")
+			.col-12.col-sm-4.col-md-6
+				br
+				h4 #{title}
+				hr
+				form.form(action="/adminRegister" method="POST")
+					.form-group
+						label(for="name") Name
+						input.form-control(type="text" name="name" required autofocus)
+						label(for="email") Email
+						input.form-control(type="email" name="email" required)
+						label(for="password") Password
+						input.form-control(type="password" name="password" required)
+						label(for="password-confirm") Confirm Password
+						input.form-control(type="password" name="password-confirm" required)
+
+					- const authOptions = [1,2]
+					h6 Please select an auth level: 1 for Admin, 2 for posting article
+					hr
+					.row
+						each authOption in authOptions
+							.col
+								.form-group
+									input(name='authLevel', id=authOption type='radio' value=authOption 
+									class="with-gap")
+									label(for=authOption) #{authOption}
+						.container
+							.row.justify-content-end
+								input.btn.btn-primary(type="submit" value=" Register")
+
+				

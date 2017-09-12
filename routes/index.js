@@ -3,6 +3,7 @@ var router = express.Router();
 const blogsController = require('../controllers/blogsController')
 const userController = require('../controllers/userController')
 const authController = require('../controllers/authController')
+const adminController = require('../controllers/adminController')
 
 const {catchErrors} = require('../handlers/errorHandlers')
 
@@ -19,7 +20,7 @@ router.get('/articles/:tag', blogsController.getArticlesByTag)
 
 // Add article page
 router.get('/add',
-	authController.isLoggedIn,
+	adminController.isLoggedInSubAdmin,
 	blogsController.addArticle)
 
 // Adding an article
@@ -46,9 +47,7 @@ router.get('/login', userController.loginForm)
 router.post('/login', authController.login)
 router.get('/register', userController.registerForm)
 
-// 1.validate registration data
-// 2. Register user
-// 3. Login
+
 
 // Saving user
 router.post('/register', 
@@ -76,6 +75,25 @@ router.post('/account/reset/:token',
 	authController.confirmedPasswords,
 	authController.update
 	)
+
+
+// ADMIN FEATURES
+
+router.get('/admin', 
+	adminController.isLoggedInAdmin,
+	adminController.getAdminPage)
+
+router.get('/adminRegister', 
+	adminController.isLoggedInAdmin,
+	adminController.registerForm)
+
+router.post('/adminRegister', 
+	adminController.isLoggedInAdmin,
+	adminController.register
+	)
+
+
+// Saving admin user
 
 
 // api

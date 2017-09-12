@@ -34,10 +34,15 @@ exports.validateRegister = (req,res,next)=>{
 }
 
 exports.register = async(req,res,next)=>{
-	const user = new User({email: req.body.email, name: req.body.name});
-	const register = promisify(User.register, User)
-	await register(user, req.body.password)
-	next()
+	try{
+		const user = new User({email: req.body.email, name: req.body.name});
+		const register = promisify(User.register, User)
+		await register(user, req.body.password)
+		next()
+	}catch(errors){
+		req.flash('danger', 'Could not create new account')
+		res.redirect('back')
+	}
 }
 
 exports.account = (req, res) =>{
@@ -59,7 +64,7 @@ exports.updateAccount = async (req,res) =>{
 		req.flash('success', 'Successfully updated profile')
 		res.redirect('back')
 	}catch(error){
-		req.flash('error', `Unable to update profile}.`)
+		req.flash('danger', `Unable to update profile}.`)
         res.render('back')
         return error
 	}

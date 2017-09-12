@@ -22,7 +22,7 @@ exports.isLoggedIn = (req, res, next)=>{
 	if(req.isAuthenticated()){
 		return next()
 	}
-	req.flash('error', 'Oops you must be logged in')
+	req.flash('danger', 'Oops you must be logged in')
 	res.redirect('/login')
 }
 
@@ -55,7 +55,8 @@ exports.forgot = async(req, res) =>{
 		res.redirect('/login')
 
 	}catch(error){
-
+		req.flash('danger', 'Could not send password request')
+		res.redirect('back')
 	}
 	
 }
@@ -75,7 +76,8 @@ exports.reset = async(req, res) =>{
 
 		res.render('reset', {title: 'Reset your Password'})
 	}catch(error){
-
+		req.flash('danger', 'Could not reset password')
+		res.redirect('back')
 	}
 }
 
@@ -85,7 +87,7 @@ exports.confirmedPasswords = (req,res, next) =>{
 		return next()
 	}
 
-	req.flash('error', 'Passwords do not match!')
+	req.flash('danger', 'Passwords do not match!')
 	res.redirect('back')
 }
 
@@ -96,7 +98,7 @@ exports.update = async(req, res) =>{
 			resetPasswordExpires: {$gt: Date.now()}
 		})
 		if(!user){
-			req.flash('error', 'Password reset is invalid or has expired')
+			req.flash('danger', 'Password reset is invalid or has expired')
 			return res.redirect('/login')
 		}
 
@@ -110,6 +112,7 @@ exports.update = async(req, res) =>{
 		req.flash('success', 'Your password has been reset')
 		res.redirect('/')
 	}catch(error){
-
+		req.flash('danger', 'Could not update account')
+		res.redirect('back')
 	}
 }
