@@ -5,7 +5,7 @@
   "scripts": {
     "prod": "node ./start.js",
     "watch": "nodemon ./start.js --ignore public/",
-    "start": "concurrently \"npm run watch\"  --names \"💻,📦\" --prefix name",
+    "start": "concurrently \"npm run watch\"  --names \"💻,📦\" --prefix name"
   },
   "dependencies": {
     "ajv": "^5.2.2",
