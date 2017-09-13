@@ -2,4 +2,46 @@ extends ../navigation/layout
 
 
 block content
-	h1 it works
+	.container
+		section.section
+			// Section heading
+			h2.section-heading.h1.pt-4
+				strong Admin Page
+			// Grid row
+			.row.text-center
+				// Grid column
+				.col-lg-4.col-md-12.mb-r
+					// Featured image
+					a(href="/adminRegister")
+						.view.gradient-card-header.blue-gradient
+							h2.h2-responsive(style="color:black !important") Add an Admin
+							i.fa.fa-plus.fa-5x(style="color:black !important")
+								.mask
+					// Excerpt
+				// Grid column
+				// Grid column
+				.col-lg-4.col-md-6.mb-r
+					// Featured image
+					a(href="/users")
+						.view.gradient-card-header.purple-gradient
+							h2.h2-responsive(style="color:black !important") Delete a user
+							i.fa.fa-minus.fa-5x(style="color:black !important")
+								.mask
+				// Grid column
+				.col-lg-4.col-md-6.mb-r
+					// Featured image
+					a(href="/admin/articles")
+						.view.gradient-card-header.peach-gradient
+							h2.h2-responsive(style="color:black !important") Delete an article
+							i.fa.fa-minus.fa-5x(style="color:black !important")
+								.mask
+			.row.text-center
+				.col-lg-4.col-md-6.mb-r
+					// Featured image
+					a(href="/features")
+						.view.gradient-card-header.peach-gradient
+							h2.h2-responsive(style="color:black !important") Featured articles
+							i.fa.fa-newspaper-o.fa-5x(style="color:black !important")
+								.mask
+				// Grid column
+			// Grid row

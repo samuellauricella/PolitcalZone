@@ -31,7 +31,8 @@ const articleSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'User',
         required: 'You must supply an author'
-    }
+    },
+    featured: [String]
 })
 
 
@@ -62,6 +63,14 @@ articleSchema.pre('save', async function(next){
     }
 })
 
+
+articleSchema.statics.getFeaturesList = function(){
+    return this.aggregate([
+        { $unwind: '$featured'},
+        { $group: {_id: '$featured', count: {$sum:1}}},
+        {$sort: {count: -1}}
+    ])
+}
 
 
 articleSchema.statics.getTagsList = function(){

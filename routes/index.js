@@ -77,12 +77,34 @@ router.post('/account/reset/:token',
 	)
 
 
-// ADMIN FEATURES
+// ADMIN FEATURES PAGE
 
 router.get('/admin', 
 	adminController.isLoggedInAdmin,
 	adminController.getAdminPage)
 
+
+// ADMIN FEATURED ARTICLES
+router.get('/features',
+	adminController.isLoggedInAdmin,
+	adminController.featuredArticles)
+
+router.get('/features/:feature',
+	adminController.isLoggedInAdmin,
+	adminController.featuredArticles)
+
+
+// ADMIN USERS AND DELETE USERS
+router.get('/users', 
+	adminController.isLoggedInAdmin,
+	adminController.getUsers)
+
+router.post('/delete/user/:id', 
+	adminController.isLoggedInAdmin,
+	adminController.deleteUser)
+
+
+// Saving admin user
 router.get('/adminRegister', 
 	adminController.isLoggedInAdmin,
 	adminController.registerForm)
@@ -93,7 +115,17 @@ router.post('/adminRegister',
 	)
 
 
-// Saving admin user
+// ADMIN DELETE ARTICLE EDIT ARTICLE PAGE
+router.post('/delete/:id', 
+	authController.isLoggedIn,
+	adminController.deleteArticle)
+
+router.get('/admin/articles',adminController.getAdminArticles)
+
+// ADMIN DELETE ARTICLE ADMIN DELETE ARTICLES PAGE
+router.post('/articles/delete/:id', 
+	adminController.isLoggedInAdmin,
+	adminController.deleteArticleAdmin)
 
 
 // api

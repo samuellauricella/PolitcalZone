@@ -35,9 +35,24 @@ mixin articleForm(article = {})
                         .col
                             input(type="checkbox" id=choice value=choice name="tags" checked=(tags.includes(choice)))
                             label(for=choice) #{choice}
+
+            - const features = ['Carousel', 'Main Feature', 'Main Featured-side', 'Sub-Carousel', 'Republican-Bottom', 'Liberal-Bottom', 'Independent-Bottom']
+            - const featureTag = article.featured || []
+            br
+            h5 Feature an article
+            hr
+            .row
+                each feature in features 
+                    .form-group
+                        .col
+                            input(type="checkbox" id=feature value=feature name="featured" checked=(featureTag.includes(feature)))
+                            label(for=feature) #{feature}
             .row.justify-content-end
                 input.btn.btn-primary.btn-lg(type="submit" value="Save" class="button")
-    .container
+                form(action=`/delete/${article._id || ''}` method="POST" enctype="multipart/form-data")
+                    input.btn.btn-danger.btn-lg(type="submit" value="Delete" class="button")
+
+
 
 
         
