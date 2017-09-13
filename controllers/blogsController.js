@@ -118,7 +118,8 @@ exports.updateArticle = async (req,res) => {
             content: req.body.content,
             tags: req.body.tags,
             slug: slug(req.body.name),
-            photo: req.body.photo
+            photo: req.body.photo,
+            featured: req.body.featured
         }
         const article= await Article.findOneAndUpdate({_id: req.params.id}, {$set: updates},{
             new: true,
@@ -130,9 +131,8 @@ exports.updateArticle = async (req,res) => {
 
         res.redirect(`/${article._id}/edit`)
     }catch(error){
-        console.log(error)
          req.flash('error', 'Unable to update article')
-         res.render('back')
+         res.render('articles')
     }
 }
 
@@ -165,3 +165,5 @@ exports.searchArticles = async(req,res)=>{
         throw Error
     }
 }
+
+

@@ -1,0 +1,8 @@
+extends ../navigation/layout
+
+
+block content
+	h1 #{user.email}
+	form(method="POST" action=`/user/${user._id}?_method=DELETE`)
+		input.btn.btn-primary.btn-lg(type="submit" value="delete" class="button")
+	

@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "prod": "node ./start.js",
-    "watch": "nodemon ./start.js --ignore public/",
-    "start": "concurrently \"npm run watch\"  --names \"💻,📦\" --prefix name"
+    "watch": "nodemon ./start.js",
+    "start": "npm run watch"
   },
   "dependencies": {
     "ajv": "^5.2.2",

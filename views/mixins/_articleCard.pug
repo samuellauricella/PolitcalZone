@@ -28,12 +28,16 @@ mixin articleCard(article={})
 						strong #{article.author}
 					| , 26/08/2016
 				a.btn.btn-primary.btn-sm(href=`/article/${article.slug}`) Read more
-				
+			
+
+
+				if user && user.authLevel==1
+					a.btn.btn-primary.btn-sm(href=`/${article._id}/edit`) Admin edit
+					
 				if user && article.author.equals(user._id)
 					a.btn.btn-primary.btn-sm(href=`/${article._id}/edit`) edit
 				
-				if user && user.authLevel==1
-					a.btn.btn-primary.btn-sm(href=`/${article._id}/edit`) edit
+
 			// Grid column
 		// Grid row
 		hr.mb-5
