@@ -1,7 +1,7 @@
 mixin carousel(carouselItem = {})
 	.carousel-item
-		.view.hm-black-light
-			img.d-block.w-100(src=`/uploads/${carouselItem.photo || 'article.jpeg'}`, alt='Second slide' style="width:1321px; height:auto")
+		.view.hm-black-strong
+			img#carouselOneImage(src=`/uploads/${carouselItem.photo || 'article.jpeg'}`, alt='Second slide' style="max-width:100%; max-height:650px;")
 			a(href=`/article/${carouselItem.slug}`)
 				.mask
 		.carousel-caption

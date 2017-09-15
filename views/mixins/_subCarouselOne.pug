@@ -1,8 +1,9 @@
 mixin subCarouselOne(subItem = {})
 		.col-md-4
-			.card
-				img.img-fluid(src=`/uploads/${subItem.photo || 'article.jpeg'} `, alt='Card image cap')
+			.card#subCarouselCard
+				img.img-fluid#subCarousel(src=`/uploads/${subItem.photo || 'article.jpeg'} `, alt='Card image cap')
 				.card-body
 					h4.card-title #{subItem.name}
 					p.card-text #{subItem.description}
 					a(href=`/article/${subItem.slug}`).btn.btn-primary Read More
+			br
