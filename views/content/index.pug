@@ -31,6 +31,7 @@ block content
   
   section.section.magazine-section#mainSection
     br
+    span.badge.badge-primary Featured 
     .row.text-left
       .col-lg-6.col-md-12
         .single-news
@@ -46,7 +47,9 @@ block content
                 strong #{mainFeature[0].description}
 
       .col-lg-6.col-md-12
+        span.badge.badge-default Trending
         // Small news
+        br
         each sideFeature in mainFeatureSide
           .single-news
             .row
@@ -64,6 +67,7 @@ block content
                   i.fa.fa-angle-right      
 
   // Carousel Wrapper
+  span.badge.badge-primary Today in Politics 
   #multi-item-example.carousel.slide.carousel-multi-item(data-ride='carousel')
     .controls-top
       a.btn-floating(href='#multi-item-example', data-slide='prev')
@@ -87,7 +91,8 @@ block content
         - const third = subCarousel.slice(6,9)
         each item in third
           +subCarouselOne(item)
-
+  
+  span.badge.badge-default The Political Zone 
   section.section.magazine-section.multi-columns
     .row.text-left
       .col-lg-4.col-md-12.mb-r

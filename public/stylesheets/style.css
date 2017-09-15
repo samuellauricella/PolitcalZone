@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Bungee+Inline|Poiret+One");
 @import url("https://fonts.googleapis.com/css?family=Anton|Changa:800|Dosis:800");
+@import url('https://fonts.googleapis.com/css?family=Cantarell:700i');
+
 style.
   .intro-2 {
     background-size: cover;
@@ -319,3 +321,18 @@ body {
   background-color: white
 }
 
+
+.badge.badge-default {
+  font-size:22px;
+  font-family: 'Cantarell';
+  background-color: #4E6BA3 !important
+
+
+}
+
+
+.badge.badge-primary{
+  font-size:22px;
+  font-family: 'Cantarell';
+  background-color: #CC1A17 !important
+}
