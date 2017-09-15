@@ -1,0 +1,9 @@
+mixin carousel(carouselItem = {})
+	.carousel-item
+		.view.hm-black-light
+			img.d-block.w-100(src=`/uploads/${carouselItem.photo || 'article.jpeg'}`, alt='Second slide' style="width:1321px; height:auto")
+			a(href=`/article/${carouselItem.slug}`)
+				.mask
+		.carousel-caption
+			h3.h3-responsive #{carouselItem.name} 
+			p #{carouselItem.description}
