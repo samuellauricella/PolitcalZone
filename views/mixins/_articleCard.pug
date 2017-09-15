@@ -10,14 +10,15 @@ mixin articleCard(article={})
 					img.img-fluid(src=`/uploads/${article.photo || 'article.jpeg'} `, alt='First sample image')
 					a
 						.mask
-			// Grid column
-			// Grid column
+
 			.col-lg-7.ml-xl-4.mb-4
 				// Excerpt
-				a.teal-text(href='')
-					h6.pb-1
-						i.fa.fa-university
-						strong  #{article.tags} 
+
+				if article.tags.length
+					a.red-text(href='')
+						h6.pb-1
+							i.fa.fa-university
+							strong  #{article.tags} 
 				h4.mb-3(style="word-wrap: break-word")
 					strong #{article.name}
 				p(style="word-wrap: break-word")
@@ -32,18 +33,16 @@ mixin articleCard(article={})
 
 
 				if user && user.authLevel==1
-					a.btn.btn-primary.btn-sm(href=`/${article._id}/edit`) Admin edit
-					
-				if user && article.author.equals(user._id)
-					a.btn.btn-primary.btn-sm(href=`/${article._id}/edit`) edit
+					a.btn.btn-warning.btn-sm(href=`/${article._id}/edit`) Admin edit
+
+				else if user && article.author.equals(user._id)
+					a.btn.btn-warning.btn-sm(href=`/${article._id}/edit`) edit
 				
 
 			// Grid column
 		// Grid row
 		hr.mb-5
 
-
-	
 
 
 

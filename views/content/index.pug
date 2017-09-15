@@ -13,194 +13,140 @@ block content
       li(data-target='#carousel-example-2', data-slide-to='2')
       li(data-target='#carousel-example-2', data-slide-to='3')
 
-    // /.Indicators
-    // Slides
-    
     -const itemCarouselOne = carousel.slice(0,1)
     .carousel-inner(role='listbox')
       .carousel-item.active
         each carouselItem in itemCarouselOne
           +carouselOne(carouselItem)
-      
       -const itemCarouselTwoThree = carousel.slice(1,3)
       each carouselItem in itemCarouselTwoThree 
         +carousel(carouselItem)
-
-    // /.Slides
-    // Controls
     a.carousel-control-prev(href='#carousel-example-2', role='button', data-slide='prev')
       span.carousel-control-prev-icon(aria-hidden='true')
       span.sr-only Previous
     a.carousel-control-next(href='#carousel-example-2', role='button', data-slide='next')
       span.carousel-control-next-icon(aria-hidden='true')
       span.sr-only Next
-    // /.Controls
   // /.Carousel Wrapper
-  .container
-    section.section.magazine-section
-      br
-      // Grid row
-      .row.text-left
-        // Grid column
+  
+  section.section.magazine-section#mainSection
+    br
+    .row.text-left
+      .col-lg-6.col-md-12
+        .single-news
+          if mainFeature && mainFeature.length
+            .view.overlay.hm-white-slight.z-depth-1-half
+                img.img-fluid#mainStory(src=`/uploads/${mainFeature[0].photo || 'article.jpeg'}`, alt='Wider sample post image')
+                a(href=`/article/${mainFeature[0].slug}`)
+                  .mask
+          if mainFeature && mainFeature.length
+            .news-data
+              a(href=`/article/${mainFeature[0].slug}`) #{mainFeature[0].name}
+              p(align='justify')
+                strong #{mainFeature[0].description}
 
-
-        .col-lg-6.col-md-12
-          // Featured news
+      .col-lg-6.col-md-12
+        // Small news
+        each sideFeature in mainFeatureSide
           .single-news
-            // Image
-            if mainFeature && mainFeature.length
-              .view.overlay.hm-white-slight.z-depth-1-half
-                  img.img-fluid(src=`/uploads/${mainFeature[0].photo || 'article.jpeg'}`, alt='Wider sample post image')
-                  a(href=`/article/${mainFeature[0].slug}`)
-                    .mask
-            if mainFeature && mainFeature.length
-              .news-data
-                a.deep-black-text(href=`/article/${mainFeature[0].slug}`) #{mainFeature[0].name}
-                p
-                  strong
-                    i.fa.fa-clock-o #{mainFeature[0].created}
-                p(align='justify') #{mainFeature[0].description}
-          // /Featured news
-        // Grid column
-        // Grid column
-        .col-lg-6.col-md-12(style="padding-left:30px")
-          // Small news
-
-          each sideFeature in mainFeatureSide
-            .single-news
-              .row
-                .col-md-3
-                  // Image
-                  .view.overlay.hm-white-slight.z-depth-1-half
-                    img.img-fluid(src=`/uploads/${sideFeature.photo || 'article.jpeg'}`, alt='Minor sample post image')
-                    a(href=`/article/${sideFeature.slug}`)
-                      .mask
-                // Excerpt
-                .col-md-9
-                  p
-                    strong #{sideFeature.created}
+            .row
+              .col-md-3
+                .view.overlay.hm-white-slight.z-depth-1-half
+                  img.img-fluid(src=`/uploads/${sideFeature.photo || 'article.jpeg'}`, alt='Minor sample post image')
                   a(href=`/article/${sideFeature.slug}`)
-                    | #{sideFeature.description}
-                    i.fa.fa-angle-right      
-          // /Small news
-          // Small news
-          
+                    .mask
+              .col-md-9
+                a(href=`/article/${sideFeature.slug}`)
+                  strong #{sideFeature.name}
+
+                p
+                  | #{sideFeature.description}
+                  i.fa.fa-angle-right      
 
   // Carousel Wrapper
   #multi-item-example.carousel.slide.carousel-multi-item(data-ride='carousel')
-    // Controls
     .controls-top
       a.btn-floating(href='#multi-item-example', data-slide='prev')
         i.fa.fa-chevron-left
       a.btn-floating(href='#multi-item-example', data-slide='next')
         i.fa.fa-chevron-right
-    // /.Controls
-    // Indicators
     ol.carousel-indicators
       li.active(data-target='#multi-item-example', data-slide-to='0')
       li(data-target='#multi-item-example', data-slide-to='1')
       li(data-target='#multi-item-example', data-slide-to='2')
-    // /.Indicators
-    // Slides
     .carousel-inner(role='listbox')
-      // First slide
-
       .carousel-item.active
         - const first = subCarousel.slice(0,3)
         each item in first
           +subCarouselOne(item)
-      // /.First slide
-      // Second slide
       .carousel-item
         - const second = subCarousel.slice(3,6)
         each item in second
           +subCarouselOne(item)
-        
       .carousel-item
         - const third = subCarousel.slice(6,9)
         each item in third
           +subCarouselOne(item)
 
-  .container
-    section.section.magazine-section.multi-columns
-      .row.text-left
-        // Grid column
-        .col-lg-4.col-md-12.mb-r
-          // Featured news
-          - const democratsOne = liberalBottom.slice(0,1)
-          each liberal in democratsOne
-            .single-news
-              // Image
-              h6.red-text
-                strong  Liberal 
-              .view.overlay.hm-white-slight.z-depth-1-half
-                img.img-fluid(src=`/uploads/${liberal.photo || 'article.jpeg'} `, alt='First sample image')
-                a(href=`/article/${liberal.slug}`)
-                  .mask
+  section.section.magazine-section.multi-columns
+    .row.text-left
+      .col-lg-4.col-md-12.mb-r
+        - const democratsOne = liberalBottom.slice(0,1)
+        each liberal in democratsOne
+          .single-news
+            h6.red-text
+              i.fa.fa-university
+              strong  Liberal 
+            .view.overlay.hm-white-slight.z-depth-1-half
+              img.img-fluid#bottomImages(src=`/uploads/${liberal.photo || 'article.jpeg'} `, alt='First sample image' )
               a(href=`/article/${liberal.slug}`)
-                strong #{liberal.name}
-                i.fa.fa-angle-right
-            // /Featured news
-            // Small news
-            
-          - const democrats = liberalBottom.slice(1,5)
-          each liberal in democrats
-            .single-news
-              a(href=`/article/${liberal.slug}`) #{liberal.name}
-                i.fa.fa-angle-right
-            
-        .col-lg-4.col-md-6.mb-r
-          // Featured news
-
-          - const republicansOne = republicanBottom.slice(0,1)
-          each republican in republicansOne
-            .single-news
-              // Image
-              h6.blue-text
-                strong  Conservative
-              .view.overlay.hm-white-slight.z-depth-1-half
-                img.img-fluid(src=`/uploads/${republican.photo || 'article.jpeg'} `, alt='Second sample image')
-                a(href=`/article/${republican.slug}`)
-                  .mask
+                .mask
+            a(href=`/article/${liberal.slug}`)
+              strong #{liberal.name}
+              i.fa.fa-angle-right
+        - const democrats = liberalBottom.slice(1,5)
+        each liberal in democrats
+          .single-news
+            a(href=`/article/${liberal.slug}`) #{liberal.name}
+              i.fa.fa-angle-right
+      .col-lg-4.col-md-6.mb-r
+        - const republicansOne = republicanBottom.slice(0,1)
+        each republican in republicansOne
+          .single-news
+            h6.blue-text
+              i.fa.fa-university
+              strong  Conservative
+            .view.overlay.hm-white-slight.z-depth-1-half
+              img.img-fluid#bottomImages(src=`/uploads/${republican.photo || 'article.jpeg'} `, alt='Second sample image' )
               a(href=`/article/${republican.slug}`)
-                strong #{republican.name}
-                i.fa.fa-angle-right
-          // /Featured news
-          // Small news
-
-          - const republicansTwo = republicanBottom.slice(1,5)
-          each conservative in republicansTwo
-            .single-news
-              a(href=`/article/${conservative.slug}`) #{conservative.name}
-                i.fa.fa-angle-right
-
-
-        .col-lg-4.col-md-6.mb-r
-          // Featured news
-          - const independentOne = independentBottom.slice(0,1)
-          each independent in independentOne
-            .single-news
-              h6.green-text
-                strong  Independent
-              .view.overlay.hm-white-slight.z-depth-1-half
-                img.img-fluid(src=`/uploads/${independent.photo || 'article.jpeg'} `, alt='Third sample image')
-                a(href=`/article/${independent.slug}`)
-                  .mask
+                .mask
+            a(href=`/article/${republican.slug}`)
+              strong #{republican.name}
+              i.fa.fa-angle-right
+        - const republicansTwo = republicanBottom.slice(1,5)
+        each conservative in republicansTwo
+          .single-news
+            a(href=`/article/${conservative.slug}`) #{conservative.name}
+              i.fa.fa-angle-right
+      .col-lg-4.col-md-6.mb-r
+        // Featured news
+        - const independentOne = independentBottom.slice(0,1)
+        each independent in independentOne
+          .single-news
+            h6.green-text
+              i.fa.fa-university
+              strong  Independent
+            .view.overlay.hm-white-slight.z-depth-1-half
+              img.img-fluid#bottomImages(src=`/uploads/${independent.photo || 'article.jpeg'} `, alt='Third sample image' )
               a(href=`/article/${independent.slug}`)
-                strong #{independent.name}
-                i.fa.fa-angle-right
-          // /Featured news
-          // Small news
-
-          - const independentTwo = independentBottom.slice(1,5)
-          each independent in independentTwo
-            .single-news
-              a(href=`/article/${independent.slug}`) #{independent.name}
-                i.fa.fa-angle-right
-            
-          // /Small news
-          // Small news
-        
-
+                .mask
+            a(href=`/article/${independent.slug}`)
+              strong #{independent.name}
+              i.fa.fa-angle-right
+        - const independentTwo = independentBottom.slice(1,5)
+        each independent in independentTwo
+          .single-news
+            a(href=`/article/${independent.slug}`) #{independent.name}
+              i.fa.fa-angle-right
 
 

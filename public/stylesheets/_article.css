@@ -1,0 +1,12 @@
+
+
+.excerpt.mt-5{
+	padding-left: 20px;
+	padding-right: 10px
+}
+
+@media screen and (max-width:500px){
+	#articleHeader{
+		font-size: 20px
+	}
+}

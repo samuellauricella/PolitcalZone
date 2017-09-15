@@ -1,8 +1,9 @@
 mixin carouselOne(item = {})
-	.view.hm-black-light
-		img.d-block.w-100(src=`/uploads/${item.photo || 'article.jpeg'}`, alt='First slide' style="width:1321px; height:auto")
+	.view.hm-black-strong
+		img#carouselOneImage(src=`/uploads/${item.photo || 'article.jpeg'}`, alt='First slide')
 		a(href=`/article/${item.slug}`)
 			.mask
 		.carousel-caption
 			h3.h3-responsive #{item.name}
 			p #{item.description}
+		

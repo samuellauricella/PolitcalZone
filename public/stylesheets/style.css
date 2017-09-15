@@ -113,3 +113,209 @@ body {
 }
 
 
+#mainSection{
+    padding-top: 50px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+    padding-left: 30px;
+    background-color: white
+}
+
+.section.magazine-section.multi-columns{
+    padding-top: 50px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+    padding-left: 30px;
+}
+
+#bottomImages{
+    position: relative;
+    float: center;
+    width:  30rem;
+    height: 15rem;
+    background-position: 50% 50%;
+    background-repeat:   no-repeat;
+    background-size:     cover;
+}
+
+
+
+
+@media screen and (min-width: 1000px) {
+  #subCarousel{
+    position: relative;
+    float: left;
+    max-width:  100%;
+    width:20rem ;
+    height:15rem;
+
+}
+
+#subCarouselCard{
+    position: relative;
+    float: left;
+    max-width:  100%;
+    width:100% ;
+    height: 35rem;
+
+}
+
+#mainStory{
+    position: relative;
+    float: left;
+    width:50rem ;
+    height: 20rem;
+
+}
+
+#carouselOneImage{
+    position: relative;
+    float: left;
+    width:70rem;
+    height: 50rem;
+
+}
+
+}
+
+
+
+
+
+@media screen and (min-width: 1200px) {
+  #subCarousel{
+    position: relative;
+    float: left;
+    max-width:  100%;
+    width:30rem ;
+    height:15rem;
+
+}
+
+#subCarouselCard{
+    position: relative;
+    float: left;
+    max-width:  100%;
+    width:100% ;
+    height: 35rem;
+
+}
+
+#mainStory{
+    position: relative;
+    float: left;
+    width:45rem ;
+    height: 25rem;
+
+}
+
+#carouselOneImage{
+    position: relative;
+    float: left;
+    width:85rem;
+    height: 50rem;
+
+}
+
+}
+
+
+
+@media screen and (min-width: 1800px) {
+  #subCarousel{
+    position: relative;
+    float: left;
+    max-width:  100%;
+    width:39rem ;
+    height:20rem;
+
+}
+
+#subCarouselCard{
+    position: relative;
+    float: left;
+    max-width:  100%;
+    width:100% ;
+    height: 40rem;
+
+}
+
+#mainStory{
+    position: relative;
+    float: left;
+    width:200% ;
+    height: 40rem;
+
+}
+
+#carouselOneImage{
+    position: relative;
+    float: left;
+    width: 120rem;
+    height: 70rem;
+
+}
+
+#bottomImages{
+    position: relative;
+    float: center;
+    width:  40rem;
+    height: 20rem;
+
+}
+}
+
+
+
+
+
+
+
+@media screen and (min-width: 2000px) {
+  #subCarousel{
+    position: relative;
+    float: left;
+    max-width:  100%;
+    width:50rem ;
+    height:30rem;
+
+}
+
+#subCarouselCard{
+    position: relative;
+    float: left;
+    max-width:  100%;
+    width:100% ;
+    height: 50rem;
+
+}
+
+#mainStory{
+    position: relative;
+    float: left;
+    width:200% ;
+    height: 40rem;
+
+}
+
+#carouselOneImage{
+    position: relative;
+    float: left;
+    width:170rem;
+    height: 90rem;
+
+}
+
+#bottomImages{
+    position: relative;
+    float: center;
+    width:  52rem;
+    height: 30rem;
+
+}
+}
+
+.section.magazine-section.multi-columns{
+  background-color: white
+}
+

@@ -2,39 +2,28 @@ extends ../navigation/layout
 
 
 block content
-
+	br
+	br
 	.container(style="background-color: transparent !important")
-		section.section.section-blog-fw.pt-5.mt-4.pb-3
-			// Grid row
-			.row
-				.col-md-12
-					// Featured image
-					.card.card-cascade.wider.reverse
-						.view.overlay.hm-white-slight
-							img(src=`/uploads/${article.photo || 'article.jpeg'}` style="width:50%; height:50%")
-							a
-								div
-						// Post data
-						.card-body.text-center
-							h2
-								a #{article.name}
-							p
-								| Written by 
-								a Abby Madison
-								| , 26/08/2016
-							// Social shares
-							.social-counters
-								i.fa.fa-university
-									strong  #{article.tags} 
-							.excerpt.mt-5
-								p(style="white-space: pre")!=article.content
-							// Social shares
-						// Post data
-					// Excerpt
+		.row
+			.col-md-12
+				.card.card-cascade.wider.reverse
+					// Post data
+					.card-body.text-center
+						h1#articleHeader #{article.name}
+						p
+							| Written by 
+							a #{article.author.name}
+						img.rounded-circle.img-responsive(src=user.gravatar style="width: 60px; height: auto")
 
-
-			// Grid row
-			hr.mb-5.mt-4
-			
-			// Grid row
-		// Section: Blog v.4
+						h6.pb-1.teal-text
+							i.fa.fa-university
+							strong  #{article.tags} 
+					// Post data
+				// Excerpt
+		.card#articleCard
+			.excerpt.mt-5
+				p(style="white-space: pre")!=article.content
+		// Grid row
+		hr.mb-5.mt-4
+	// Section: Blog v.4	

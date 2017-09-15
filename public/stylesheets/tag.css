@@ -25,13 +25,13 @@
       position: relative;
       z-index: 2; }
       .tag__choice input + label {
-        background: #e6e6e6;
+        background: #CC1A17;
         padding: 1rem 1rem 1rem 4rem; }
       .tag__choice input:checked + label {
-        background: #FFC40E; }
+        background: #CC1A17; }
   .tag__link {
-    background: white;
-    color: #303030;
+    background: #4E6BA3;
+    color: white;
     display: -ms-flexbox;
     display: flex;
     padding-left: 10px;
