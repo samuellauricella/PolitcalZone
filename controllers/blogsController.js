@@ -22,6 +22,7 @@ const multerOptions = {
 
 
 exports.homePage = (req,res) => {
+
     res.render('index', { success: req.flash('success'), title:'The Political Zone' })
 }
 
@@ -56,7 +57,7 @@ exports.createArticle = async (req, res) => {
             res.redirect(`/article/${article.slug}`)
         }catch(error){
             req.flash('error', `Unable to create ${article.name}.`)
-            res.render('back')
+            res.redirect('back')
             return error
         }
 };
@@ -64,11 +65,24 @@ exports.createArticle = async (req, res) => {
 ///HOMEPAGE ARTICLES
 exports.getArticles = async (req, res) => {
     try{
-       const articles = await Article.find();
-        res.render('index',{articles})
+
+
+       const one = await Article.find({"featured": "Carousel"}).sort({created: -1}).limit(3)
+       const two = await Article.find({"featured": "Main Feature"}).sort({created: -1}).limit(1)
+       const three =  await Article.find({"featured": "Main Featured-Side"}).sort({created: -1}).limit(4)
+       const four =  await Article.find({"featured": "Sub-Carousel"}).sort({created: -1}).limit(9)
+       const five =  await Article.find({"featured": "Republican-Bottom"}).sort({created: -1}).limit(5)
+       const six =  await Article.find({"featured": "Liberal-Bottom"}).sort({created: -1}).limit(5)
+       const seven =  await Article.find({"featured": "Independent-Bottom"}).sort({created: -1}).limit(5)
+
+
+       const [carousel,mainFeature,mainFeatureSide, subCarousel, republicanBottom, liberalBottom, independentBottom] = await Promise.all([one,two,three,four,five,six,seven])
+
+       res.render('index',{carousel, mainFeature, mainFeatureSide,subCarousel,republicanBottom,liberalBottom, independentBottom})
+       
     } catch (error){
         req.flash('error', `Unable to get articles at this time}.`)
-        res.render('back')
+        res.redirect('back')
         return error
     }
 }
@@ -78,14 +92,14 @@ exports.getArticlesByTag = async (req,res)=>{
     try{
         const tag = req.params.tag
         const tagQuery = tag || { $exists: true}
-        const tagsPromise = await Article.getTagsList()
+        const tagsPromise =  Article.getTagsList()
         const articlesPromise = Article.find({tags:tagQuery})
 
         const [tags, articles] = await Promise.all([tagsPromise, articlesPromise])
         res.render('articles', {tags, title: 'The Political Zone', tag,articles})
     }catch(error){
         req.flash('error', `Unable to get articles at this time}.`)
-        res.render('back')
+        res.redirect('back')
         return error
     }
 }
