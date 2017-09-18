@@ -2,28 +2,22 @@ extends ../navigation/layout
 
 
 block content
-	br
-	br
-	.container(style="background-color: transparent !important")
+
+	.container(style="background-color: #F5F5F5")
+		br
+		br
 		.row
 			.col-md-12
 				.card.card-cascade.wider.reverse
-					// Post data
-					.card-body.text-center
+					.card-body.text-center(style="background-color: #F5F5F5")
 						h1#articleHeader #{article.name}
-						p
-							| Written by 
-							a #{article.author.name}
-						img.rounded-circle.img-responsive(src=user.gravatar style="width: 60px; height: auto")
-
-						h6.pb-1.teal-text
-							i.fa.fa-university
-							strong  #{article.tags} 
-					// Post data
-				// Excerpt
-		.card#articleCard
-			.excerpt.mt-5
+						img.rounded-circle.img-responsive(src=article.author.gravatar style="width: 60px; height: auto")
+						p Written by #{article.author.name}
+						
+						each tag in article.tags
+							.chip.pb-1.red-text
+								i.fa.fa-university
+								strong  #{tag} 
+		.excerpt.mt-5
 				p(style="white-space: pre")!=article.content
-		// Grid row
 		hr.mb-5.mt-4
-	// Section: Blog v.4	

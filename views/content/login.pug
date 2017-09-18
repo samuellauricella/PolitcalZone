@@ -3,14 +3,18 @@ include ../mixins/_loginForm
 include ../mixins/_forgot
 
 block content 
-	.inner
-		+loginForm()
-	.container
-		button(type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm") Small modal	
+	+loginForm()
+
+		.footer.pt-3.mdb-color.lighten-3
 		.modal.fade.bd-example-modal-sm(tabindex="-1" role="dialog")
 			.modal-dialog.modal-sm
 				.modal-content
-					+forgotForm()
+					.card
+						form(action="/account/forgot" method="POST")
+							h5 Forgot Password?
+							label(for="email") Email
+							input(type="email" name="email")
+							input.btn.btn-primary(type="submit" value="Send reset verification")
 
 
 

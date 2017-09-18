@@ -31,8 +31,8 @@ block content
   
   section.section.magazine-section#mainSection
     br
-    span.badge.badge-primary Featured 
-    .row.text-left
+    span.badge.badge-primary FEATURED 
+    .row.text-left(style="padding-top:10px")
       .col-lg-6.col-md-12
         .single-news
           if mainFeature && mainFeature.length
@@ -43,15 +43,14 @@ block content
           if mainFeature && mainFeature.length
             .news-data
               a(href=`/article/${mainFeature[0].slug}`) #{mainFeature[0].name}
-              p(align='justify')
+              p(align='justify' style="padding-top:10px")
                 strong #{mainFeature[0].description}
 
       .col-lg-6.col-md-12
-        span.badge.badge-default Trending
+        span.badge.badge-default TRENDING
         // Small news
-        br
         each sideFeature in mainFeatureSide
-          .single-news
+          .single-news(style="padding-top:10px")
             .row
               .col-md-3
                 .view.overlay.hm-white-slight.z-depth-1-half
@@ -62,22 +61,22 @@ block content
                 a(href=`/article/${sideFeature.slug}`)
                   strong #{sideFeature.name}
 
-                p
+                p(style="padding-top:10px")
                   | #{sideFeature.description}
                   i.fa.fa-angle-right      
 
   // Carousel Wrapper
-  span.badge.badge-primary Today in Politics 
+  span.badge.badge-primary TODAY IN POLITICS 
   #multi-item-example.carousel.slide.carousel-multi-item(data-ride='carousel')
     .controls-top
-      a.btn-floating(href='#multi-item-example', data-slide='prev')
+      a.btn-floating#clickIcon(href='#multi-item-example', data-slide='prev')
         i.fa.fa-chevron-left
-      a.btn-floating(href='#multi-item-example', data-slide='next')
+      a.btn-floating#clickIcon(href='#multi-item-example', data-slide='next')
         i.fa.fa-chevron-right
     ol.carousel-indicators
-      li.active(data-target='#multi-item-example', data-slide-to='0')
-      li(data-target='#multi-item-example', data-slide-to='1')
-      li(data-target='#multi-item-example', data-slide-to='2')
+      li.active#indicators(data-target='#multi-item-example', data-slide-to='0')
+      li#indicators(data-target='#multi-item-example', data-slide-to='1')
+      li#indicators(data-target='#multi-item-example', data-slide-to='2')
     .carousel-inner(role='listbox')
       .carousel-item.active
         - const first = subCarousel.slice(0,3)
@@ -92,7 +91,7 @@ block content
         each item in third
           +subCarouselOne(item)
   
-  span.badge.badge-default The Political Zone 
+  span.badge.badge-default THE POLITICAL ZONE 
   section.section.magazine-section.multi-columns
     .row.text-left
       .col-lg-4.col-md-12.mb-r
@@ -134,7 +133,6 @@ block content
             a(href=`/article/${conservative.slug}`) #{conservative.name}
               i.fa.fa-angle-right
       .col-lg-4.col-md-6.mb-r
-        // Featured news
         - const independentOne = independentBottom.slice(0,1)
         each independent in independentOne
           .single-news

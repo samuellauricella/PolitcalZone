@@ -13,9 +13,9 @@ html(class="full-height")
 
     meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
     meta(http-equiv="x-ua-compatible" content="ie=edge")
-  
+    include ../mixins/_loginForm
 
-  body(style="background-color: #F6F6F6")
+  body(style="background-color: #233A56")
 
     nav.navbar.navbar-expand-lg.navbar-light.fixed-top.scrolling-navbar
       a.navbar-brand(href='/')
@@ -43,32 +43,36 @@ html(class="full-height")
               button#dropdownMenuButtonbtn.btn.btn-outline-info(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
                 | Settings
               .dropdown-menu(aria-labelledby='dropdownMenuButton')
-                .col.align-self-center
+                .d-flex.justify-content-center
                   a.accounts(href="/account")
                     img.rounded-circle.img-responsive(src=user.gravatar style="width: 60px; height: auto")
                 hr
                 if user && user.authLevel ==1
-                  a.btn.aqua-gradient.btn-rounded(href='/admin') Admin Page
+                  .d-flex.justify-content-center
+                    a.btn.btn-mdb.btn-lg(href='/admin') Admin Page
                 hr
-                .col.align-self-center
-                  a.btn.btn-danger.btn-rounded(href="/logout") Logout
+                .d-flex.justify-content-center
+                  a.btn.btn-danger.btn-lg(href="/logout") Logout
               
           else
             li.nav-item
-              a.nav-link(href="/login") Sign in
+              a.nav-link(data-toggle="modal" data-target=".bd-example-modal-lg") Sign in
             li.nav-item
-              a.nav-link(href="/register") Register
+              a.nav-link(href="/register" style="color:black") Register
 
 
 
-    //- ////////////////////////// Navbar Version
-        br
+    .modal.fade.bd-example-modal-lg(tabindex="-1" role="dialog")
+      .modal-dialog.modal-lg
+        .modal-content
+          +loginForm()
+    
     br
     br
     br
     br
 
-
+    
     block messages
     if locals.flashes
       .inner
@@ -76,15 +80,39 @@ html(class="full-height")
           - const categories = Object.keys(locals.flashes)
           each category in categories
             each message in flashes[category]
-              .flash.row(class=`alert alert-${category}`)
-                p.col!= message
-                button.btn.btn-danger(onClick="this.parentElement.remove()") &times;
+                .row.card(class=`alert alert-${category}`)
+                    h2(style="color:black !important; font-family: Bangers; text-align:center")!= message  
+                    button.btn.btn-danger.animated.pulse.infinite(onClick="this.parentElement.remove()") &times;
+     
+
     block content
 
-    // Footer
-  
 
-    
+
+    // Footer
+  footer.page-footer.center-on-small-only.pt-0(style="background-color:#FFFFFF")
+    // Footer Links
+    .container
+      // First row
+      .row
+        // First column
+        .col-md-12
+          .footer-socials.mb-5.flex-center
+            // Facebook
+            a.icons-sm.fb-ic
+              i.fa.fa-facebook.fa-lg.black-text.mr-md-4  
+            // Twitter
+            a.icons-sm.tw-ic
+              i.fa.fa-twitter.fa-lg.black-text.mr-md-4  
+            // Instagram
+            a.icons-sm.ins-ic
+              i.fa.fa-instagram.fa-lg.black-text.mr-md-4  
+
+
+    .footer-copyright(style="background-color:grey")
+      .container-fluid
+        | © 2017 Copyright: 
+        a(href='/')  The Political Zone
 
   script
     script.

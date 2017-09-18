@@ -2,11 +2,27 @@ extends ../navigation/layout
 
 
 block content 
-	.container
-		h2=title
-		form(action="/account" method="POST")
-			label(for="name") Name
-			input(type="text" name="name" value=user.name)
-			label(for="email") Email
-			input(type="email" name="email" value=user.email)
-			input.btn(type="submit" value="Update profile")
+	br
+	br
+	.container(style="background-color: transparent !important")
+		section.section.pb-3.text-center
+			.row
+				// Grid column
+				.col.align-self-center.col-md-12.mb-r
+					// Card
+					.card.testimonial-card
+						// Background color
+						.card-up.red.lighten-2
+						// Avatar
+						.avatar
+							img.rounded-circle.img-responsive(src=user.gravatar )
+						.card-body
+							h4.card-title.mt-1 #{user.name}
+							hr
+							form(action="/account" method="POST")
+								label(for="name") Name
+								input.form-control(type="text" name="name" value=user.name)
+								label(for="email") Email
+								input.form-control(type="email" name="email" value=user.email)
+								input.btn.btn-primary(type="submit" value="Update profile")
+
