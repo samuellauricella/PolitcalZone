@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "prod": "node ./start.js",
+    "start": "node ./start.js",
     "watch": "nodemon ./start.js",
-    "start": "npm run watch"
+    "dev": "npm run watch"
   },
   "dependencies": {
     "ajv": "^5.2.2",
