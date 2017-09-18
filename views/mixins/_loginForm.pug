@@ -1,22 +1,46 @@
 mixin loginForm()
-	br
-	.container
-		.row.align-items-start
-			.col-6.col-md-6
-				img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Uncle_Sam_%28pointing_finger%29.png/571px-Uncle_Sam_%28pointing_finger%29.png" width="300")
-			.col-12.col-sm-4.col-md-6
-				br
-				h4 Sign In
-				hr
+	section.form-light
+		// Form without header
+		.card
+			.card-body.mx-4
+				// Header
+				.text-center
+					h3.red-text.mb-5
+						strong Login
+				// Body
 				form.form(action="/login" method="POST")
 					.form-group
-						label(for="email") Email
-						input.form-control(type="email" name="email" required)
-						label(for="password") Password
-						input.form-control(type="password" name="password" required)
-						.container
-							.row.justify-content-end
-								input.btn.btn-primary(type="submit" value=" Login")
+						.md-form.pb-3
+							input.form-control(ype="email" placeholder="Email" name="email" required)
+						.md-form.pb-3
+							label(for="password") Your password
+							input#Form-pass2.form-control(type="password" name="password" required)
+							
+						// Grid row
+						.row.justify-content-center
+							// Grid column
+							.col-md-3.col-md-6.text-center
+								button.btn.btn-red.btn-block.btn-rounded.z-depth-1(type="submit" value=" Login") Login
+					// Grid column
+					// Grid column
+				.row.justify-content-center
+					.col.justify-content-center
+						p.font-small.grey-text(style="text-align:center")
+							| Don't Have an account? 
+							a.blue-text.ml-1(href='/register')  Sign Up
+
+						p.font-small.grey-text.d-flex.justify-content-end
+	
+				.row.justify-content-center
+					.col-md-3.col-md-6.text-center
+						form(action="/account/forgot" method="POST")
+							h5 Forgot Password?
+							label(for="email") Email
+							input(type="email" name="email")
+							input.btn.btn-primary(type="submit" value="Send reset verification")
+				
+
+
 
 
 

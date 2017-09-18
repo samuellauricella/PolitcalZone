@@ -4,19 +4,24 @@ extends ../navigation/layout
 block content
 	br
 	br
-	.container(style="background-color: transparent !important")
-		.row
-			each user in users
-				.col-12.col-sm-5.col-md-4
-					.card
-						h3.card-header.primary-color.white-text #{user.name}
-						.card-body
-							p.card-text #{user.email}
-
-							if user && user.authLevel
-								p.card-text Level: #{user.authLevel}
+	.container
+		table.table
+			// Table head
+			thead.blue-grey.lighten-4
+				tr
+					th #
+					th User
+					th Auth Level
+					th Remove
+			// Table head
+			// Table body
+			tbody
+				each user, index in users
+					tr
+						th(scope='row') #{ 1 + index}
+						td #{user.name}
+						if user && user.authLevel
+							td #{user.authLevel}
+						td
 							form(action=`/delete/user/${user._id || ''}?_method=DELETE` method="POST" enctype="multipart/form-data")
-								input.btn.btn-danger.btn-lg(type="submit" value="delete" class="button" id="test_delete")
-					br
-
-
+										input.btn.btn-danger.btn-lg(type="submit" value="delete" class="button" id="test_delete")

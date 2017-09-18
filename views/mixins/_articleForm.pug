@@ -2,6 +2,7 @@ mixin articleForm(article = {})
     
     br
     .container
+        br
         form(action=`/add/${article._id || ''}` method="POST" enctype="multipart/form-data")
             .md-form
                 label(for="name") Name

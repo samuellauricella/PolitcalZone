@@ -2,26 +2,44 @@ extends ../navigation/layout
 
 block content
 	br
-	.container
-		.row.align-items-start
-			.col-6.col-md-6
-				img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Uncle_Sam_%28pointing_finger%29.png/571px-Uncle_Sam_%28pointing_finger%29.png" width="300")
-			.col-12.col-sm-4.col-md-6
-				br
-				h4 Log In
-				hr
-				form.form(action="/register" method="POST")
-					.form-group
-						label(for="name") Name
-						input.form-control(type="text" name="name" required autofocus)
-						label(for="email") Email
-						input.form-control(type="email" name="email" required)
-						label(for="password") Password
-						input.form-control(type="password" name="password" required)
-						label(for="password-confirm") Confirm Password
-						input.form-control(type="password" name="password-confirm" required)
-						.container
-							.row.justify-content-end
-								input.btn.btn-primary(type="submit" value=" Register")
+	.container(style="background-color: transparent !important")
+		section.form-light
+			// Form without header
+			.card
+				.card-body.mx-4
+					// Header
+					.text-center
+						h3.red-text.mb-5
+							strong Sign up
+					// Body
+					form.form(action="/register" method="POST")
+						.form-group
+							.md-form
+								input#Form-email2.form-control(type="text" name="name" required autofocus)
+								label(for="name") Your name
+
+							.md-form
+								input#Form-email2.form-control(type="email" name="email" required)
+								label(for="email") Your email
+							.md-form.pb-3
+								input#Form-pass2.form-control(type="password" name="password" required)
+								label(for="password") Your password
+							.md-form.pb-3
+								input#Form-pass2.form-control(type="password" name="password-confirm" required)
+								label(for="password-confirm") Confirm Password
+
+							// Grid row
+							.row.d-flex.align-items-center.mb-4
+								// Grid column
+								.col-md-3.col-md-6.text-center
+									button.btn.btn-red.btn-block.btn-rounded.z-depth-1(type="submit" value=" Register") Sign up
+								// Grid column
+								// Grid column
+								.col-md-6
+									p.font-small.grey-text.d-flex.justify-content-end
+										| Have an account? 
+										a.blue-text.ml-1(href='/login')  Log in
+
+
 
 

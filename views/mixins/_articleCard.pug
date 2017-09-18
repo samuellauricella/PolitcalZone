@@ -8,35 +8,30 @@ mixin articleCard(article={})
 				// Featured image
 				.view.overlay.hm-white-slight.z-depth-1-half
 					img.img-fluid(src=`/uploads/${article.photo || 'article.jpeg'} `, alt='First sample image')
-					a
+					a(href=`/article/${article.slug}`)
 						.mask
 
 			.col-lg-7.ml-xl-4.mb-4
 				// Excerpt
 
-				if article.tags.length
-					a.red-text(href='')
-						h6.pb-1
-							i.fa.fa-university
-							strong  #{article.tags} 
+				each tag in article.tags
+					.chip.pb-1.red-text
+						i.fa.fa-university
+						strong  #{tag} 
 				h4.mb-3(style="word-wrap: break-word")
 					strong #{article.name}
 				p(style="word-wrap: break-word")
 					| #{article.description}
-				p
-					| by 
-					a
-						strong #{article.author}
-					| , 26/08/2016
-				a.btn.btn-primary.btn-sm(href=`/article/${article.slug}`) Read more
+
+				a.btn.btn-primary.btn-lg(href=`/article/${article.slug}`) Read more
 			
 
 
 				if user && user.authLevel==1
-					a.btn.btn-warning.btn-sm(href=`/${article._id}/edit`) Admin edit
+					a.btn.btn-warning.btn-lg(href=`/${article._id}/edit`) Admin edit
 
 				else if user && article.author.equals(user._id)
-					a.btn.btn-warning.btn-sm(href=`/${article._id}/edit`) edit
+					a.btn.btn-warning.btn-lg(href=`/${article._id}/edit`) edit
 				
 
 			// Grid column

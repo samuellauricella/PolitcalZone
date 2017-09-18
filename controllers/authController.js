@@ -35,7 +35,7 @@ exports.forgot = async(req, res) =>{
 
 		if(!user){
 			req.flash('success','A password reset has been mailed to you')
-			return res.redirect('/login')
+			return res.redirect('/')
 		}
 
 		user.resetPasswordToken = crypto.randomBytes(20).toString('hex')
@@ -52,7 +52,7 @@ exports.forgot = async(req, res) =>{
 			resetUrl
 		})
 		req.flash('success', `You have been emailed a password reset link`)
-		res.redirect('/login')
+		res.redirect('/')
 
 	}catch(error){
 		req.flash('danger', 'Could not send password request')

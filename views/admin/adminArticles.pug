@@ -5,16 +5,28 @@ include ../mixins/_articleCard
 block content
 	br
 	br
-	.container(style="background-color: transparent !important")
-		.row
-			each article in articles
-				.col-12.col-sm-5.col-md-4
-					.card
-						h3.card-header.primary-color.white-text #{article.name}
-						.card-body
+
+	.container
+		table.table
+			// Table head
+			thead.blue-grey.lighten-4
+				tr
+					th #
+					th Name
+					th Description
+					th Remove
+					th Edit
+			// Table head
+			// Table body
+			tbody
+				each article, index in articles
+					tr
+						th(scope='row') #{ 1 + index}
+						td #{article.name}
+						td 
 							p.card-text #{article.description}
+						td
 							form(action=`/articles/delete/${article._id || ''}?_method=DELETE` method="POST" enctype="multipart/form-data")
 								input.btn.btn-danger.btn-lg(type="submit" value="delete" class="button")
-					br
-
-
+						td
+							a.btn.btn-warning.btn-lg(href=`/${article._id}/edit`) Edit

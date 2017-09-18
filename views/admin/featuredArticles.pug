@@ -10,6 +10,7 @@ block content
 					li.tag
 						a.tag__link(href=`/features/${f._id}` class=(f._id === feature ? 'tag__link--active' : ''))
 							span.tag__text=f._id	
+						br
 	
 	each article in articles
 		if article.featured

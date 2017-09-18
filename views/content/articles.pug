@@ -4,15 +4,16 @@ include ../mixins/_articleCard
 
 block content
 	br
+
 	.container.fluid(style="background-color: transparent !important")
 		.row.justify-content-md-center
 			ul.tags
 				if tags
 					each t in tags
 						li.tag
-							a.tag__link(href=`/articles/${t._id}` class=(t._id === tag ? 'tag__link--active' : ''))
+							a.tag__link(href=`/articles/${t._id}` class=(t._id === tag ? 'tag__link--active': ''))
 								span.tag__text=t._id	
-	if tags	
+	if tags	 
 		each article in articles
 			.container
 				+articleCard(article)
