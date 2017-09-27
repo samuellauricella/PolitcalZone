@@ -1,0 +1,26 @@
+mixin comment(comment = {})
+
+
+
+	// Section: Social newsfeed v.2
+	section.pt-5.pb-3
+		// Grid row
+		.row
+			// Grid column
+			.col-lg-11
+				// Newsfeed
+				.mdb-feed
+					// First news
+					.news
+						// Label
+						.label
+							img.rounded-circle.z-depth-1-half(src=comment.author.gravatar)
+						// Excert
+						.excerpt
+							// Brief
+							.brief
+								a.name #{comment.author.name}
+								.date= h.moment(comment.created).fromNow()
+							// Added text
+							p#commentText #{comment.text}
+							// Feed footer

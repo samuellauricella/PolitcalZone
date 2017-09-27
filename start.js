@@ -21,6 +21,8 @@ mongoose.connection.on('error', (err) => {
 // READY?! Let's go!
 require('./models/Article');
 require('./models/User');
+require('./models/Comment');
+
 // Start our app!
 const app = require('./app');
 app.set('port', process.env.PORT || 3000);

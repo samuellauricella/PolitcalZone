@@ -4,6 +4,7 @@ const blogsController = require('../controllers/blogsController')
 const userController = require('../controllers/userController')
 const authController = require('../controllers/authController')
 const adminController = require('../controllers/adminController')
+const commentController = require('../controllers/commentController')
 
 const {catchErrors} = require('../handlers/errorHandlers')
 
@@ -131,5 +132,10 @@ router.post('/articles/delete/:id',
 // api
 
 router.get('/api/search', blogsController.searchArticles)
+
+router.post('/comments/:id', 
+	authController.isLoggedIn,
+	commentController.addComment
+	)
 
 module.exports = router;

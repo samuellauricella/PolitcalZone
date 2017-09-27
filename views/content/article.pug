@@ -1,4 +1,6 @@
 extends ../navigation/layout
+include ../mixins/_commentForm
+include ../mixins/_comment
 
 
 block content
@@ -21,3 +23,15 @@ block content
 		.excerpt.mt-5
 				p(style="white-space: pre")!=article.content
 		hr.mb-5.mt-4
+
+	br
+
+	.container(style="background-color: transparent !important")
+		.card
+			if user
+				.row
+					+commentForm(article)
+
+			if article.comments
+				each comment in article.comments
+					+comment(comment)

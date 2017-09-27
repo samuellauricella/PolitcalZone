@@ -33,6 +33,9 @@ const articleSchema = new mongoose.Schema({
         required: 'You must supply an author'
     },
     featured: [String]
+}, {
+    toJSON: {virtuals: true},
+    toObject: {virtuals: true}
 })
 
 
@@ -68,7 +71,7 @@ articleSchema.statics.getFeaturesList = function(){
     return this.aggregate([
         { $unwind: '$featured'},
         { $group: {_id: '$featured', count: {$sum:1}}},
-        {$sort: {count: -1}}
+        { $sort: {count: -1}}
     ])
 }
 
@@ -80,6 +83,13 @@ articleSchema.statics.getTagsList = function(){
         {$sort: {count: -1}}
     ])
 }
+
+
+articleSchema.virtual('comments', {
+    ref: 'Comment',
+    localField: '_id',
+    foreignField: 'article'
+})
 
 
 module.exports = mongoose.model('Article', articleSchema)

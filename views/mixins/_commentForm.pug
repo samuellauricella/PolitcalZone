@@ -1,0 +1,7 @@
+mixin commentForm(article)
+
+	.col#commentForm
+		form.md-form(action=`/comments/${article._id}` method="POST")
+			textarea.md-textarea(name="text")
+			label#commentForm(for="commentForm") Leave a comment..
+			input.btn.btn-primary(type="submit" value="Submit")
