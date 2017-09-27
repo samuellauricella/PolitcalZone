@@ -87,22 +87,40 @@ exports.getArticles = async (req, res) => {
     }
 }
 
+
+
+
 // ARTICLES PAGE
 exports.getArticlesByTag = async (req,res)=>{
     try{
+
+        const page = req.params.page || 1;
+        const limit = 4;
+        const skip = (page*limit) -limit
+
         const tag = req.params.tag
         const tagQuery = tag || { $exists: true}
         const tagsPromise =  Article.getTagsList()
-        const articlesPromise = Article.find({tags:tagQuery})
+        const articlesPromise = Article.find({tags:tagQuery}).skip(skip).limit(limit).sort({created: -1})
+        const countPromise = Article.find({tags:tagQuery}).count()
 
-        const [tags, articles] = await Promise.all([tagsPromise, articlesPromise])
-        res.render('articles', {tags, title: 'The Political Zone', tag,articles})
+        const [tags, articles, count] = await Promise.all([tagsPromise, articlesPromise, countPromise])
+        const pages = Math.ceil(count / limit)
+
+        res.render('articles', {tags, title: 'The Political Zone',tag,articles, page, pages, count })
     }catch(error){
-        req.flash('error', `Unable to get articles at this time}.`)
+        req.flash('error', `Unable to get articles at this time.`)
         res.redirect('back')
         return error
     }
 }
+
+
+
+
+
+
+
 
 // ARTICLES EDIT
 
@@ -152,6 +170,7 @@ exports.updateArticle = async (req,res) => {
 
 // INDI ARTICLE PAGE
 exports.getArticleBySlug = async (req, res, next) =>{
+
     const article = await Article.findOne({slug: req.params.slug}).populate('author comments')
 
     if(!article) return next()

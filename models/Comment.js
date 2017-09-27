@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+var mongoosePaginate = require('mongoose-paginate');
 mongoose.Promise = global.Promise
 
 const commentSchema = new mongoose.Schema({
@@ -29,6 +30,7 @@ function autoPopulate(next){
 	next()
 }
 
+commentSchema.plugin(mongoosePaginate)
 commentSchema.pre('find', autoPopulate)
 commentSchema.pre('findOne', autoPopulate)
 
