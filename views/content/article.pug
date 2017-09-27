@@ -5,7 +5,7 @@ include ../mixins/_comment
 
 block content
 
-	.container(style="background-color: #F5F5F5")
+	.container(style="background-color: transparent !important")
 		br
 		br
 		.row
@@ -20,7 +20,7 @@ block content
 							.chip.pb-1.red-text
 								i.fa.fa-university
 								strong  #{tag} 
-		.excerpt.mt-5
+		.excerpt.mt-5.card(style="background-color:white")
 				p(style="white-space: pre")!=article.content
 		hr.mb-5.mt-4
 

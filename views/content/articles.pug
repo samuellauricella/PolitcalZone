@@ -1,5 +1,7 @@
 extends ../navigation/layout
 include ../mixins/_articleCard
+include ../mixins/_pagination
+include ../mixins/_paginationTwo
 
 
 block content
@@ -12,8 +14,18 @@ block content
 					each t in tags
 						li.tag
 							a.tag__link(href=`/articles/${t._id}` class=(t._id === tag ? 'tag__link--active': ''))
-								span.tag__text=t._id	
-	if tags	 
+								span.tag__text= t._id
+								
+
 		each article in articles
 			.container
 				+articleCard(article)
+	hr
+	if tag
+		+pagination(page,pages,count)
+	else
+		+paginationTwo(page,pages,count)
+
+
+
+

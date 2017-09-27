@@ -14,9 +14,12 @@ router.get('/', blogsController.getArticles)
 // Articles Page
 router.get('/articles', blogsController.getArticlesByTag)
 
+router.get('/articles/page/:page', blogsController.getArticlesByTag)
+
 // Not sure if i need this route
 router.get('/articles/:tag', blogsController.getArticlesByTag)
 
+router.get('/articles/:tag/page/:page', blogsController.getArticlesByTag)
 
 
 // Add article page
@@ -42,6 +45,8 @@ router.get('/:id/edit', blogsController.editArticle)
 
 // Getting individual article
 router.get('/article/:slug', blogsController.getArticleBySlug)
+
+router.get('/article/:slug/page/:page', blogsController.getArticleBySlug)
 
 // Login and Register Forms
 router.get('/login', userController.loginForm)

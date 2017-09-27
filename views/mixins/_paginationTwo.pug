@@ -1,0 +1,23 @@
+mixin paginationTwo(page, pages, count)
+	.container(style="background-color: transparent !important")
+		.div(style="background-color: transparent !important")
+			.d-flex.justify-content-center
+				.d-flex(style="float: left !important;")
+					if page ===1
+						a.btn.btn-danger.justify-content-end.disabled(href=`/articles/page/${page -1}`) Prev
+					else if page >1
+						a.btn.btn-danger.justify-content-end(href=`/articles/page/${page -1}`) Prev
+					else 
+						a.btn.btn-danger.justify-content-end.disabled(href=`/articles/page/${page -1}`) Prev
+
+				.d-flex
+					p(style="color:white") #{page} of #{pages}
+				.d-flex(style="float: right !important;")
+
+					if page === pages
+						a.btn.btn-danger.justify-content-end.disabled(href=`/articles/page/${parseFloat(page) +1}`) Next
+
+					else if page < pages 
+						a.btn.btn-danger.justify-content-end(href=`/articles/page/${parseFloat(page) +1}`) Next
+					else
+						a.btn.btn-danger.justify-content-end.disabled(href=`/articles/page/${parseFloat(page) +1}`) Next
