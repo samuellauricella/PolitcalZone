@@ -10,7 +10,8 @@ html(class="full-height")
     link(rel='stylesheet', href='/stylesheets/_commentForm.css')
     link(rel='stylesheet', href='/stylesheets/tag.css')
     link(rel='stylesheet', type='text/css', href='/javascripts/trix/trix.css')
-    
+    script(src="https://unpkg.com/vue")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/vuejs-paginator/2.0.2/vuejs-paginator.js")
 
     meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
     meta(http-equiv="x-ua-compatible" content="ie=edge")
@@ -114,7 +115,6 @@ html(class="full-height")
       .container-fluid
         | © 2017 Copyright: 
         a(href='/')  The Political Zone
-
   script
     script.
       new WOW().init();    
@@ -125,6 +125,8 @@ html(class="full-height")
     script(type="text/javascript" src="/javascripts/mdBootstrap/mdb.min.js")
     script(type='text/javascript', src='/javascripts/trix/trix.js')
     script(type='text/javascript', src='/javascripts/custom/custom.js')
+
+
 
 
 

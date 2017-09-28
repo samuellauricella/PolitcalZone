@@ -4,10 +4,10 @@ include ../mixins/_comment
 
 
 block content
-
 	.container(style="background-color: transparent !important")
 		br
 		br
+	.div(style="background-color: white")
 		.row
 			.col-md-12
 				.card.card-cascade.wider.reverse
@@ -20,18 +20,17 @@ block content
 							.chip.pb-1.red-text
 								i.fa.fa-university
 								strong  #{tag} 
-		.excerpt.mt-5.card(style="background-color:white")
-				p(style="white-space: pre")!=article.content
-		hr.mb-5.mt-4
+		.container(style="background-color: transparent !important")
+			.text(style="padding-top:90px")
+				!=article.content
+	.div(style="background-color: white")
+		.container(style="background-color: transparent !important")
+			.container
+				if user
+					.row
+						+commentForm(article)
 
-	br
-
-	.container(style="background-color: transparent !important")
-		.card
-			if user
-				.row
-					+commentForm(article)
-
-			if article.comments
-				each comment in article.comments
-					+comment(comment)
+			.container(style="padding-top: 40px; height: 200px; overflow: scroll;")
+				if article.comments
+					each comment in article.comments
+						+comment(comment)
