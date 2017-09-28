@@ -30,7 +30,6 @@ function autoPopulate(next){
 	next()
 }
 
-commentSchema.plugin(mongoosePaginate)
 commentSchema.pre('find', autoPopulate)
 commentSchema.pre('findOne', autoPopulate)
 

@@ -170,9 +170,10 @@ exports.updateArticle = async (req,res) => {
 
 // INDI ARTICLE PAGE
 exports.getArticleBySlug = async (req, res, next) =>{
-
     const article = await Article.findOne({slug: req.params.slug}).populate('author comments')
+    const comments = article.comments
 
+    console.log(comments)
     if(!article) return next()
     res.render('article', {article, title: article.name})
 }
